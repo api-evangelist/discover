@@ -11,8 +11,8 @@ apis:
       - url: https://partner.discoverglobalnetwork.com
         type: Documentation
     description: Revolutionize the digital landscape and fuel your imagination with
-      powerful tools, resources, and documentation from Discover® Global Network
-      —designed to simplify the development journey for businesses and
+      powerful tools, resources, and documentation from Discover_ Global Network
+      -designed to simplify the development journey for businesses and
       developers.
 name: Discover
 tags:
@@ -24,8 +24,8 @@ created: 2024-11-15
 modified: 2024-11-15
 position: Consumer
 description: Revolutionize the digital landscape and fuel your imagination with
-  powerful tools, resources, and documentation from Discover® Global Network
-  —designed to simplify the development journey for businesses and developers.
+  powerful tools, resources, and documentation from Discover_ Global Network
+  -designed to simplify the development journey for businesses and developers.
   Explore all products.
 maintainers:
   - FN: Kin Lane
