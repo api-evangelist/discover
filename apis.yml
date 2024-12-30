@@ -153,4 +153,20 @@ maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
 specificationVersion: '0.19'
-common: []
+common:
+  - name: Discover Partner Product Portal
+    description: 'null'
+    url: https://partner.discoverglobalnetwork.com/partner-resources
+    type: Partners
+  - name: FAQs | Discover Partner Product Portal
+    description: 'null'
+    url: https://partner.discoverglobalnetwork.com/faq
+    type: FAQ
+  - name: Global Privacy Center | Discover Global Network
+    description: 'null'
+    url: https://www.discoverglobalnetwork.com/privacy-policy/
+    type: PrivacyPolicy
+  - name: Terms of Use | Discover Global Network/
+    description: 'null'
+    url: https://www.discoverglobalnetwork.com/terms-of-use/
+    type: TermsOfService
