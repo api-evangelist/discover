@@ -1,7 +1,5 @@
 # Discover (discover)
-
-Discover Financial Services is a financial services company that offers
-banking and payment services.
+Discover is a leading financial services company that offers a range of products and services to help individuals and businesses achieve their financial goals. From credit cards to personal loans, Discover provides innovative solutions that make managing money easier and more convenient. With a focus on customer service and innovation, Discover is committed to helping customers make smart financial decisions and navigate the complex world of finance. Whether you're looking to earn rewards on your everyday purchases or need a loan to help you achieve a major milestone, Discover has a solution for you.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-search/discover/refs/heads/main/apis.yml)
 
