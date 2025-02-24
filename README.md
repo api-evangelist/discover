@@ -1,5 +1,5 @@
 # Discover (discover)
-Discover is a leading financial services company that offers a range of products and services to help individuals and businesses achieve their financial goals. From credit cards to personal loans, Discover provides innovative solutions that make managing money easier and more convenient. With a focus on customer service and innovation, Discover is committed to helping customers make smart financial decisions and navigate the complex world of finance. Whether you're looking to earn rewards on your everyday purchases or need a loan to help you achieve a major milestone, Discover has a solution for you.
+Discover is a financial services company that offers a range of products and services to help individuals manage their money. They provide credit cards, personal loans, home equity loans, and savings and checking accounts. Discover also operates an online banking platform that allows customers to easily access and manage their accounts from anywhere. Additionally, Discover offers cash back rewards and other perks to help customers make the most of their finances. Overall, Discover aims to help customers achieve their financial goals and live better lives.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-search/discover/refs/heads/main/apis.yml)
 
@@ -16,7 +16,7 @@ Discover is a leading financial services company that offers a range of products
 ## Timestamps
 
 - **Created:** 2024-11-15 
-- **Modified:** 2025-02-20 
+- **Modified:** 2025-02-24 
 
 ## APIs
 
@@ -28,7 +28,7 @@ Discover HCE Wallet Services offers a secure and convenient way for customers to
 
 #### Tags:
 
- - No Tags
+ - Credit Cards, Wallets
 
 #### Properties
 
