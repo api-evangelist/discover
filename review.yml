@@ -1,4 +1,4 @@
-executed: '2025-02-21T01:09:34.215Z'
+executed: '2025-02-24T19:27:51.226Z'
 results:
   - code: apis-json-specification-aid-info
     message: There is an aid.
@@ -1891,8 +1891,8 @@ results:
         line: 275
         character: 13
       end:
-        line: 278
-        character: 31
+        line: 284
+        character: 6
   - code: apis-json-maintainers-info
     message: There is a maintainer object.
     path:
@@ -1900,10 +1900,10 @@ results:
     severity: 2
     range:
       start:
-        line: 279
+        line: 285
         character: 12
       end:
-        line: 281
+        line: 287
         character: 33
   - code: apis-json-maintainers-fn-info
     message: There is a FN property for maintainers.
@@ -1914,10 +1914,10 @@ results:
     severity: 2
     range:
       start:
-        line: 280
+        line: 286
         character: 8
       end:
-        line: 280
+        line: 286
         character: 16
   - code: apis-json-maintainers-email-info
     message: There is a email property for maintainers.
@@ -1928,10 +1928,10 @@ results:
     severity: 2
     range:
       start:
-        line: 281
+        line: 287
         character: 11
       end:
-        line: 281
+        line: 287
         character: 33
   - code: apis-json-specification-version-info
     message: There is a specification version.
@@ -1940,8 +1940,8 @@ results:
     severity: 2
     range:
       start:
-        line: 282
+        line: 288
         character: 22
       end:
-        line: 282
+        line: 288
         character: 28
