@@ -273,7 +273,7 @@ common:
     type: TermsOfService
     description: 'null'
 created: '2024-11-15T00:00:00.000Z'
-modified: '2025-02-24'
+modified: '2026-03-16'
 position: Consumer
 description: >-
   Discover is a financial services company that offers a range of products and
@@ -286,5 +286,5 @@ description: >-
   goals and live better lives.
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
 specificationVersion: '0.19'
