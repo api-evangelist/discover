@@ -213,6 +213,10 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: GitHubOrganization
+    url: https://github.com/discoverfinancial
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/discover
   - url: https://partner.discoverglobalnetwork.com/partner-resources
     name: Discover Partner Product Portal
     type: Partners
