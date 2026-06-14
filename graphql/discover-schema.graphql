@@ -1,0 +1,1016 @@
+"""
+Conceptual GraphQL schema for Discover Financial Services.
+Covers credit cards, banking, lending, rewards, payments, fraud,
+tokenization, and partner API infrastructure.
+Source: Derived from Discover's publicly documented REST APIs and
+product offerings via partner.discoverglobalnetwork.com and
+developer.discover.com.
+"""
+
+# ─── Scalars ────────────────────────────────────────────────────────────────
+
+scalar Date
+scalar DateTime
+scalar Decimal
+scalar URL
+
+# ─── Enums ──────────────────────────────────────────────────────────────────
+
+enum CardStatus {
+  ACTIVE
+  INACTIVE
+  FROZEN
+  CLOSED
+  PENDING_ACTIVATION
+}
+
+enum TransactionType {
+  PURCHASE
+  CASH_ADVANCE
+  BALANCE_TRANSFER
+  PAYMENT
+  CREDIT
+  ADJUSTMENT
+  FEE
+  INTEREST
+}
+
+enum TransactionStatus {
+  PENDING
+  POSTED
+  DECLINED
+  REVERSED
+  DISPUTED
+}
+
+enum PaymentStatus {
+  SCHEDULED
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+  RETURNED
+}
+
+enum AlertSeverity {
+  INFO
+  WARNING
+  CRITICAL
+}
+
+enum AlertChannel {
+  EMAIL
+  SMS
+  PUSH
+  IN_APP
+  PHONE
+}
+
+enum AccountType {
+  CREDIT_CARD
+  SAVINGS
+  MONEY_MARKET
+  CD
+  PERSONAL_LOAN
+  STUDENT_LOAN
+  HELOC
+  MORTGAGE
+  DEBIT
+}
+
+enum TokenType {
+  HCE
+  SE
+  SXS
+  STORED_PAYMENT
+}
+
+enum TokenStatus {
+  ACTIVE
+  SUSPENDED
+  DELETED
+  PENDING
+}
+
+enum LoanStatus {
+  CURRENT
+  DELINQUENT
+  CHARGED_OFF
+  PAID_OFF
+  IN_FORBEARANCE
+  IN_DEFERMENT
+}
+
+enum RedemptionType {
+  STATEMENT_CREDIT
+  BANK_DEPOSIT
+  CHARITY_DONATION
+  GIFT_CARD
+  PARTNER_REWARD
+}
+
+enum WebhookEvent {
+  TRANSACTION_POSTED
+  PAYMENT_RECEIVED
+  PAYMENT_DUE
+  FRAUD_ALERT
+  SECURITY_ALERT
+  CREDIT_SCORE_CHANGE
+  STATEMENT_READY
+  CARD_STATUS_CHANGE
+  REWARD_EARNED
+  OFFER_AVAILABLE
+}
+
+# ─── Account and Card Types ──────────────────────────────────────────────────
+
+"""Core credit card account."""
+type CreditCard {
+  id: ID!
+  accountNumber: String!
+  last4: String!
+  cardholderName: String!
+  status: CardStatus!
+  accountType: AccountType!
+  openedDate: Date!
+  creditLimit: CreditLimit!
+  accountBalance: AccountBalance!
+  cashAdvanceLimit: CashAdvanceLimit!
+  card: Card
+  virtualCard: VirtualCard
+  authorizedUsers: [AuthorizedUser!]
+  rewards: [Reward!]
+  transactions(
+    limit: Int
+    offset: Int
+    startDate: Date
+    endDate: Date
+    type: TransactionType
+  ): [Transaction!]
+  statements: [Statement!]
+  payments: [Payment!]
+  alerts: [Alert!]
+  offers: [Offer!]
+  promotions: [Promotion!]
+  creditScore: CreditScore
+  creditMonitor: CreditMonitor
+  autoPay: AutoPay
+  customer: Customer!
+}
+
+"""Current balance on a credit card account."""
+type AccountBalance {
+  id: ID!
+  currentBalance: Decimal!
+  availableCredit: Decimal!
+  pendingTransactions: Decimal!
+  lastUpdated: DateTime!
+  currency: String!
+}
+
+"""Balance as recorded on the most recent or a given statement."""
+type StatementBalance {
+  id: ID!
+  statementDate: Date!
+  balance: Decimal!
+  minimumPayment: MinimumPayment!
+  dueDate: Date!
+  isPaid: Boolean!
+}
+
+"""Minimum payment due for the current billing cycle."""
+type MinimumPayment {
+  id: ID!
+  amount: Decimal!
+  dueDate: Date!
+  isPastDue: Boolean!
+  pastDueAmount: PastDueAmount
+}
+
+"""Cash advance credit sub-limit and available amount."""
+type CashAdvanceLimit {
+  id: ID!
+  totalLimit: Decimal!
+  availableLimit: Decimal!
+  outstandingBalance: Decimal!
+  feeRate: Decimal!
+  aprRate: Decimal!
+}
+
+"""Total credit limit and utilization on a credit card."""
+type CreditLimit {
+  id: ID!
+  totalLimit: Decimal!
+  availableCredit: Decimal!
+  utilizationPercentage: Decimal!
+  lastReviewedDate: Date
+}
+
+"""Physical credit or debit card details."""
+type Card {
+  id: ID!
+  last4: String!
+  expirationDate: String!
+  cardholderName: String!
+  status: CardStatus!
+  issuedDate: Date!
+  network: String!
+  isContactless: Boolean!
+  isChip: Boolean!
+  dualCard: DualCard
+}
+
+"""Virtual card for card-not-present and digital wallet transactions."""
+type VirtualCard {
+  id: ID!
+  token: String!
+  last4: String!
+  expirationDate: String!
+  status: CardStatus!
+  linkedAccount: CreditCard!
+  createdAt: DateTime!
+  lastUsedAt: DateTime
+  walletProvider: String
+}
+
+"""Discover Dual Card — credit and debit on a single physical card."""
+type DualCard {
+  id: ID!
+  cardId: ID!
+  debitNetworkEnabled: Boolean!
+  creditNetworkEnabled: Boolean!
+  linkedSavingsAccount: Savings
+  linkedDebitCard: DebitCard
+}
+
+"""Checking or savings debit card."""
+type DebitCard {
+  id: ID!
+  last4: String!
+  expirationDate: String!
+  cardholderName: String!
+  status: CardStatus!
+  issuedDate: Date!
+  network: String!
+  isContactless: Boolean!
+  linkedBankAccount: BankAccount
+}
+
+# ─── Transaction Types ───────────────────────────────────────────────────────
+
+"""Individual financial transaction on an account."""
+type Transaction {
+  id: ID!
+  date: Date!
+  postedDate: Date
+  amount: Decimal!
+  currency: String!
+  type: TransactionType!
+  status: TransactionStatus!
+  description: String!
+  merchantName: String
+  merchantCategory: String
+  merchantCategoryCode: String
+  isInternational: Boolean!
+  cashBack: CashBack
+  detail: TransactionDetail
+}
+
+"""Purchase transaction with merchant details."""
+type Purchase {
+  id: ID!
+  transactionId: ID!
+  date: Date!
+  postedDate: Date
+  amount: Decimal!
+  currency: String!
+  status: TransactionStatus!
+  merchantName: String!
+  merchantAddress: Address
+  merchantCategoryCode: String!
+  isOnline: Boolean!
+  isContactless: Boolean!
+  cashBack: CashBack
+  rewards: [Reward!]
+}
+
+"""Extended detail record for a single transaction."""
+type TransactionDetail {
+  id: ID!
+  transactionId: ID!
+  authorizationCode: String
+  referenceNumber: String!
+  network: String!
+  terminalId: String
+  posEntryMode: String
+  billedAmount: Decimal!
+  billedCurrency: String!
+  exchangeRate: Decimal
+  originalAmount: Decimal
+  originalCurrency: String
+  disputeEligible: Boolean!
+  disputeDeadline: Date
+}
+
+"""Record of a missed payment event."""
+type MissingPayment {
+  id: ID!
+  accountId: ID!
+  dueDate: Date!
+  amountDue: Decimal!
+  daysMissed: Int!
+  lateFeeAssessed: LateFee
+  reportedToCreditBureau: Boolean!
+  reportedDate: Date
+}
+
+# ─── Rewards and Offers ──────────────────────────────────────────────────────
+
+"""Cash back earned on a transaction or for a period."""
+type CashBack {
+  id: ID!
+  transactionId: ID
+  amount: Decimal!
+  rate: Decimal!
+  category: String
+  earnedDate: Date!
+  isBonus: Boolean!
+  cashBackBonus: CashBackBonus
+}
+
+"""Promotional cash back bonus (e.g., 5% rotating category bonus)."""
+type CashBackBonus {
+  id: ID!
+  name: String!
+  bonusRate: Decimal!
+  baseRate: Decimal!
+  category: String!
+  activatedDate: Date
+  startDate: Date!
+  endDate: Date!
+  quarterlyMaxAmount: Decimal
+  isActivated: Boolean!
+  totalEarned: Decimal!
+}
+
+"""Generic reward point, mile, or benefit record."""
+type Reward {
+  id: ID!
+  accountId: ID!
+  type: String!
+  amount: Decimal!
+  earnedDate: Date!
+  expirationDate: Date
+  description: String!
+  relatedTransactionId: ID
+  redemptions: [RewardRedemption!]
+}
+
+"""Record of a reward redemption event."""
+type RewardRedemption {
+  id: ID!
+  rewardId: ID!
+  redemptionType: RedemptionType!
+  amount: Decimal!
+  redemptionDate: DateTime!
+  status: String!
+  statementCreditApplied: Decimal
+  bankDepositAmount: Decimal
+  targetBankAccount: BankAccount
+  confirmationNumber: String!
+}
+
+"""Active promotional offer or campaign on an account."""
+type Promotion {
+  id: ID!
+  name: String!
+  description: String!
+  startDate: Date!
+  endDate: Date!
+  terms: String!
+  isActivated: Boolean!
+  activatedDate: Date
+  eligibleCategories: [String!]
+  bonusRate: Decimal
+  bonusAmount: Decimal
+}
+
+"""Merchant or card offer available to a cardholder."""
+type Offer {
+  id: ID!
+  merchantName: String!
+  merchantLogo: URL
+  title: String!
+  description: String!
+  terms: String!
+  expirationDate: Date
+  cashBackAmount: Decimal
+  cashBackRate: Decimal
+  isActivated: Boolean!
+  activatedDate: Date
+  category: String
+}
+
+# ─── Payment Types ───────────────────────────────────────────────────────────
+
+"""Payment made to a credit card or loan account."""
+type Payment {
+  id: ID!
+  accountId: ID!
+  amount: Decimal!
+  scheduledDate: Date!
+  processedDate: Date
+  status: PaymentStatus!
+  paymentMethod: PaymentMethod!
+  confirmationNumber: String
+  isAutoPayment: Boolean!
+  note: String
+}
+
+"""Automatic payment schedule configuration."""
+type AutoPay {
+  id: ID!
+  accountId: ID!
+  isEnabled: Boolean!
+  paymentAmount: Decimal
+  paymentType: String!
+  paymentDay: Int
+  paymentMethod: PaymentMethod
+  nextScheduledDate: Date
+  lastPaymentDate: Date
+  lastPaymentAmount: Decimal
+}
+
+"""Saved payment method on file for an account."""
+type PaymentMethod {
+  id: ID!
+  type: String!
+  last4: String
+  bankName: String
+  accountType: String
+  isDefault: Boolean!
+  verifiedDate: Date
+  linkedBankAccount: BankAccount
+}
+
+"""External bank account linked for payments or transfers."""
+type BankAccount {
+  id: ID!
+  bankName: String!
+  routingNumber: String!
+  accountNumberLast4: String!
+  accountType: String!
+  accountHolderName: String!
+  isVerified: Boolean!
+  verifiedDate: Date
+  addedDate: DateTime!
+  isDefault: Boolean!
+}
+
+"""ACH transfer record for electronic funds movement."""
+type ACH {
+  id: ID!
+  traceNumber: String!
+  amount: Decimal!
+  direction: String!
+  sourceAccount: BankAccount
+  destinationAccount: BankAccount
+  initiatedDate: DateTime!
+  settlementDate: Date
+  status: String!
+  returnCode: String
+  returnReason: String
+}
+
+"""Outstanding past-due balance on an account."""
+type PastDueAmount {
+  id: ID!
+  accountId: ID!
+  amount: Decimal!
+  daysPastDue: Int!
+  originalDueDate: Date!
+  lateFees: [LateFee!]
+}
+
+"""Late fee assessed on an account."""
+type LateFee {
+  id: ID!
+  accountId: ID!
+  amount: Decimal!
+  assessedDate: Date!
+  relatedPaymentDueDate: Date!
+  isWaived: Boolean!
+  waivedDate: Date
+  waivedReason: String
+}
+
+# ─── Statements and Documents ────────────────────────────────────────────────
+
+"""Monthly billing statement for a credit card account."""
+type Statement {
+  id: ID!
+  accountId: ID!
+  statementDate: Date!
+  closingDate: Date!
+  openingBalance: Decimal!
+  closingBalance: Decimal!
+  minimumPaymentDue: Decimal!
+  paymentDueDate: Date!
+  purchases: Decimal!
+  cashAdvances: Decimal!
+  fees: Decimal!
+  interest: Decimal!
+  payments: Decimal!
+  credits: Decimal!
+  cashBackEarned: Decimal!
+  pdfUrl: URL
+  transactions: [Transaction!]
+}
+
+"""Annual tax document associated with an account."""
+type TaxDocument {
+  id: ID!
+  accountId: ID!
+  taxYear: Int!
+  documentType: String!
+  amount: Decimal!
+  issueDate: Date!
+  downloadUrl: URL
+  isFiled: Boolean!
+}
+
+"""Bank account statement record."""
+type BankStatement {
+  id: ID!
+  bankAccountId: ID!
+  statementDate: Date!
+  openingBalance: Decimal!
+  closingBalance: Decimal!
+  totalDeposits: Decimal!
+  totalWithdrawals: Decimal!
+  interestEarned: Decimal!
+  pdfUrl: URL
+  transactions: [Transaction!]
+}
+
+# ─── Alerts and Notifications ────────────────────────────────────────────────
+
+"""General account alert or notice for a cardholder."""
+type Alert {
+  id: ID!
+  accountId: ID!
+  type: String!
+  severity: AlertSeverity!
+  title: String!
+  message: String!
+  createdAt: DateTime!
+  readAt: DateTime
+  isRead: Boolean!
+  channel: AlertChannel!
+  relatedTransactionId: ID
+}
+
+"""Push or in-app notification delivered to a customer."""
+type Notification {
+  id: ID!
+  customerId: ID!
+  type: String!
+  title: String!
+  body: String!
+  sentAt: DateTime!
+  readAt: DateTime
+  isRead: Boolean!
+  channel: AlertChannel!
+  actionUrl: URL
+}
+
+"""Security-related alert (login attempt, device change, password reset)."""
+type SecurityAlert {
+  id: ID!
+  customerId: ID!
+  alertType: String!
+  severity: AlertSeverity!
+  message: String!
+  detectedAt: DateTime!
+  ipAddress: String
+  deviceInfo: String
+  location: String
+  isAcknowledged: Boolean!
+  acknowledgedAt: DateTime
+}
+
+"""Suspected fraud alert on a credit card account."""
+type FraudAlert {
+  id: ID!
+  accountId: ID!
+  transactionId: ID
+  alertType: String!
+  severity: AlertSeverity!
+  message: String!
+  detectedAt: DateTime!
+  amount: Decimal
+  merchantName: String
+  location: String
+  isReviewed: Boolean!
+  reviewedAt: DateTime
+  isConfirmedFraud: Boolean
+  isDisputeOpened: Boolean!
+  channel: AlertChannel!
+}
+
+# ─── Credit Monitoring ───────────────────────────────────────────────────────
+
+"""FICO credit score snapshot for a cardholder."""
+type CreditScore {
+  id: ID!
+  customerId: ID!
+  score: Int!
+  scoreDate: Date!
+  scoreSource: String!
+  scoreModel: String!
+  changeFromPrior: Int
+  priorScore: Int
+  priorScoreDate: Date
+  keyFactors: [String!]
+  nextUpdateDate: Date
+}
+
+"""Credit monitoring enrollment status and alert history."""
+type CreditMonitor {
+  id: ID!
+  customerId: ID!
+  isEnrolled: Boolean!
+  enrolledDate: Date
+  currentScore: CreditScore
+  scoreHistory: [CreditScore!]
+  alerts: [Alert!]
+  bureauMonitored: String!
+  darkWebMonitoring: Boolean!
+  ssn: Boolean!
+}
+
+# ─── Customer and Profile Types ──────────────────────────────────────────────
+
+"""Core customer record for a Discover account holder."""
+type Customer {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  dateOfBirth: Date
+  ssn: String
+  profile: Profile!
+  addresses: [Address!]!
+  contacts: [Contact!]!
+  accounts: [AccountSummary!]
+  beneficiaries: [Beneficiary!]
+  authorizedUsers: [AuthorizedUser!]
+  creditScore: CreditScore
+  creditMonitor: CreditMonitor
+  notifications: [Notification!]
+  securityAlerts: [SecurityAlert!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Summary reference for any account type associated with a customer."""
+type AccountSummary {
+  id: ID!
+  accountType: AccountType!
+  last4: String
+  nickname: String
+  status: String!
+  openedDate: Date!
+}
+
+"""Customer profile with preferences, settings, and login info."""
+type Profile {
+  id: ID!
+  customerId: ID!
+  username: String!
+  email: String!
+  paperlessEnabled: Boolean!
+  preferredLanguage: String!
+  marketingOptIn: Boolean!
+  twoFactorEnabled: Boolean!
+  lastLoginAt: DateTime
+  timezone: String!
+}
+
+"""Physical mailing, billing, or service address."""
+type Address {
+  id: ID!
+  type: String!
+  line1: String!
+  line2: String
+  city: String!
+  state: String!
+  postalCode: String!
+  country: String!
+  isPrimary: Boolean!
+  isVerified: Boolean!
+}
+
+"""Contact information entry (email address or phone number)."""
+type Contact {
+  id: ID!
+  type: String!
+  value: String!
+  isPrimary: Boolean!
+  isVerified: Boolean!
+  verifiedDate: Date
+  optedInToAlerts: Boolean!
+}
+
+"""Beneficiary designation on a savings or CD account."""
+type Beneficiary {
+  id: ID!
+  accountId: ID!
+  firstName: String!
+  lastName: String!
+  relationship: String!
+  sharePercentage: Decimal!
+  dateOfBirth: Date
+  ssn: String
+  address: Address
+  isPrimary: Boolean!
+}
+
+"""Authorized user added to a Discover credit card account."""
+type AuthorizedUser {
+  id: ID!
+  creditCardId: ID!
+  firstName: String!
+  lastName: String!
+  dateOfBirth: Date
+  relationship: String
+  card: Card
+  spendingLimit: Decimal
+  addedDate: Date!
+  status: String!
+}
+
+# ─── Banking Products ────────────────────────────────────────────────────────
+
+"""Discover Online Savings Account."""
+type Savings {
+  id: ID!
+  customerId: ID!
+  accountNumber: String!
+  last4: String!
+  balance: Decimal!
+  availableBalance: Decimal!
+  apy: Decimal!
+  interestRate: Decimal!
+  interestEarnedYTD: Decimal!
+  openedDate: Date!
+  status: String!
+  isJoint: Boolean!
+  beneficiaries: [Beneficiary!]
+  transactions: [Transaction!]
+  statements: [BankStatement!]
+  taxDocuments: [TaxDocument!]
+}
+
+"""Discover Money Market Account."""
+type MoneyMarket {
+  id: ID!
+  customerId: ID!
+  accountNumber: String!
+  last4: String!
+  balance: Decimal!
+  availableBalance: Decimal!
+  apy: Decimal!
+  interestRate: Decimal!
+  interestEarnedYTD: Decimal!
+  minimumBalance: Decimal!
+  openedDate: Date!
+  status: String!
+  transactions: [Transaction!]
+  statements: [BankStatement!]
+  debitCard: DebitCard
+}
+
+"""Discover Certificate of Deposit."""
+type CD {
+  id: ID!
+  customerId: ID!
+  accountNumber: String!
+  last4: String!
+  principalAmount: Decimal!
+  currentBalance: Decimal!
+  apy: Decimal!
+  interestRate: Decimal!
+  termMonths: Int!
+  openedDate: Date!
+  maturityDate: Date!
+  status: String!
+  isAutoRenew: Boolean!
+  renewalTermMonths: Int
+  earlyWithdrawalPenalty: Decimal!
+  beneficiaries: [Beneficiary!]
+  taxDocuments: [TaxDocument!]
+}
+
+# ─── Lending Products ────────────────────────────────────────────────────────
+
+"""Discover Personal Loan."""
+type PersonalLoan {
+  id: ID!
+  customerId: ID!
+  loanNumber: String!
+  originalAmount: Decimal!
+  currentBalance: Decimal!
+  availableAmount: Decimal
+  interestRate: Decimal!
+  apr: Decimal!
+  termMonths: Int!
+  monthlyPayment: Decimal!
+  nextPaymentDate: Date!
+  nextPaymentAmount: Decimal!
+  originationDate: Date!
+  payoffDate: Date!
+  status: LoanStatus!
+  payoffAmount: Decimal!
+  payoffDate_actual: Date
+  payments: [Payment!]
+  statements: [Statement!]
+}
+
+"""Discover Private Student Loan."""
+type StudentLoan {
+  id: ID!
+  customerId: ID!
+  loanNumber: String!
+  originalAmount: Decimal!
+  currentBalance: Decimal!
+  interestRate: Decimal!
+  apr: Decimal!
+  loanType: String!
+  school: String
+  disbursementDate: Date
+  firstPaymentDate: Date
+  status: LoanStatus!
+  repaymentPlan: String!
+  isInGrace: Boolean!
+  defermentEndDate: Date
+  forbearanceEndDate: Date
+  monthlyPayment: Decimal
+  payments: [Payment!]
+}
+
+"""Discover Home Equity Line of Credit."""
+type HELOC {
+  id: ID!
+  customerId: ID!
+  loanNumber: String!
+  creditLimit: Decimal!
+  outstandingBalance: Decimal!
+  availableCredit: Decimal!
+  drawPeriodEndDate: Date!
+  repaymentPeriodEndDate: Date!
+  interestRate: Decimal!
+  apr: Decimal!
+  isVariableRate: Boolean!
+  indexRate: Decimal
+  margin: Decimal
+  minimumDrawAmount: Decimal!
+  status: LoanStatus!
+  propertyAddress: Address
+  payments: [Payment!]
+  statements: [Statement!]
+}
+
+"""Discover Mortgage product."""
+type Mortgage {
+  id: ID!
+  customerId: ID!
+  loanNumber: String!
+  originalAmount: Decimal!
+  currentBalance: Decimal!
+  interestRate: Decimal!
+  apr: Decimal!
+  isFixedRate: Boolean!
+  termYears: Int!
+  originationDate: Date!
+  maturityDate: Date!
+  monthlyPayment: Decimal!
+  nextPaymentDate: Date!
+  status: LoanStatus!
+  escrowBalance: Decimal
+  propertyAddress: Address
+  payments: [Payment!]
+  statements: [Statement!]
+}
+
+# ─── API and Security Infrastructure ────────────────────────────────────────
+
+"""Developer or partner API key for programmatic access."""
+type APIKey {
+  id: ID!
+  name: String!
+  keyPrefix: String!
+  environment: String!
+  scopes: [String!]!
+  createdAt: DateTime!
+  expiresAt: DateTime
+  lastUsedAt: DateTime
+  isActive: Boolean!
+  webhooks: [Webhook!]
+}
+
+"""Payment network token (HCE, SE, SXS, Stored Payment)."""
+type Token {
+  id: ID!
+  tokenType: TokenType!
+  tokenValue: String!
+  last4: String!
+  status: TokenStatus!
+  linkedCardId: ID!
+  walletProvider: String
+  deviceId: String
+  provisionedAt: DateTime!
+  lastUsedAt: DateTime
+  expiresAt: DateTime
+  requestor: String
+  networkReference: String
+}
+
+"""Webhook subscription for event-based notifications."""
+type Webhook {
+  id: ID!
+  url: URL!
+  events: [WebhookEvent!]!
+  isActive: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  secret: String
+  signingAlgorithm: String!
+  lastTriggeredAt: DateTime
+  failureCount: Int!
+  description: String
+}
+
+# ─── Root Types ──────────────────────────────────────────────────────────────
+
+type Query {
+  creditCard(id: ID!): CreditCard
+  creditCards(customerId: ID!): [CreditCard!]
+  accountBalance(accountId: ID!): AccountBalance
+  statementBalance(accountId: ID!, statementDate: Date): StatementBalance
+  transaction(id: ID!): Transaction
+  transactions(
+    accountId: ID!
+    limit: Int
+    offset: Int
+    startDate: Date
+    endDate: Date
+    type: TransactionType
+  ): [Transaction!]
+  statement(id: ID!): Statement
+  statements(accountId: ID!): [Statement!]
+  payment(id: ID!): Payment
+  payments(accountId: ID!): [Payment!]
+  reward(id: ID!): Reward
+  rewards(accountId: ID!): [Reward!]
+  cashBackBonus(accountId: ID!): CashBackBonus
+  offers(accountId: ID!): [Offer!]
+  promotions(accountId: ID!): [Promotion!]
+  creditScore(customerId: ID!): CreditScore
+  creditMonitor(customerId: ID!): CreditMonitor
+  customer(id: ID!): Customer
+  alerts(accountId: ID!): [Alert!]
+  fraudAlerts(accountId: ID!): [FraudAlert!]
+  securityAlerts(customerId: ID!): [SecurityAlert!]
+  savings(id: ID!): Savings
+  moneyMarket(id: ID!): MoneyMarket
+  cd(id: ID!): CD
+  personalLoan(id: ID!): PersonalLoan
+  studentLoan(id: ID!): StudentLoan
+  heloc(id: ID!): HELOC
+  mortgage(id: ID!): Mortgage
+  token(id: ID!): Token
+  tokens(accountId: ID!): [Token!]
+  webhook(id: ID!): Webhook
+  webhooks(apiKeyId: ID!): [Webhook!]
+  apiKey(id: ID!): APIKey
+}
+
+type Mutation {
+  makePayment(accountId: ID!, amount: Decimal!, paymentMethodId: ID!, scheduledDate: Date): Payment
+  setupAutoPay(accountId: ID!, paymentType: String!, paymentMethodId: ID!, paymentDay: Int): AutoPay
+  cancelAutoPay(accountId: ID!): AutoPay
+  addBankAccount(routingNumber: String!, accountNumber: String!, accountType: String!, accountHolderName: String!): BankAccount
+  removeBankAccount(bankAccountId: ID!): Boolean
+  addAuthorizedUser(creditCardId: ID!, firstName: String!, lastName: String!, dateOfBirth: Date): AuthorizedUser
+  removeAuthorizedUser(authorizedUserId: ID!): Boolean
+  activateCashBackBonus(accountId: ID!, bonusId: ID!): CashBackBonus
+  activateOffer(accountId: ID!, offerId: ID!): Offer
+  redeemRewards(accountId: ID!, amount: Decimal!, redemptionType: RedemptionType!, targetBankAccountId: ID): RewardRedemption
+  freezeCard(cardId: ID!): Card
+  unfreezeCard(cardId: ID!): Card
+  reportFraud(transactionId: ID!, description: String!): FraudAlert
+  acknowledgeSecurityAlert(alertId: ID!): SecurityAlert
+  createWebhook(url: URL!, events: [WebhookEvent!]!, description: String): Webhook
+  deleteWebhook(webhookId: ID!): Boolean
+  updateProfile(customerId: ID!, paperlessEnabled: Boolean, marketingOptIn: Boolean, preferredLanguage: String): Profile
+}
