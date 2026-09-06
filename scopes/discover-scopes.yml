@@ -1,0 +1,70 @@
+generated: '2026-09-06'
+method: searched
+source: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide
+docs: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide
+note: >-
+  Discover documents an OAuth 2.0 client-credentials scope model but does NOT publish a scope
+  catalogue. Section 2.1 of the developer guide states scopes are "provided in the Discover
+  Developer Center upon review by Discover" and the request form is literally
+  scope=DISCOVER_SCOPE_NAME - a placeholder. The concrete scope names are issued per partner, per
+  API product and per environment behind the invitation-only Developer Center login, so no scope
+  list is recorded here. The published scopes below belong to the Okta authorization server that
+  signs humans into the partner portal, not to the API gateway.
+schemes:
+- name: DiscoverApiGatewayOAuth2
+  source: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://apis.discover.com/auth/oauth/v2/token
+    scopes_published: false
+    scope_parameter: scope=<DISCOVER_SCOPE_NAME>
+    permission_model: 'read, write and delete access levels granted per API resource'
+- name: DiscoverPartnerPortalOkta
+  source: well-known/discover-identity-default-openid-configuration.json
+  probed: '2026-09-06'
+  audience: human sign-in to the Discover Partner Product Portal / Developer Center
+  flows:
+  - flow: authorizationCode
+    issuer: https://identity.discoverglobalnetwork.com/oauth2/default
+    authorizationUrl: https://identity.discoverglobalnetwork.com/oauth2/default/v1/authorize
+    tokenUrl: https://identity.discoverglobalnetwork.com/oauth2/default/v1/token
+    revocationUrl: https://identity.discoverglobalnetwork.com/oauth2/default/v1/revoke
+    introspectionUrl: https://identity.discoverglobalnetwork.com/oauth2/default/v1/introspect
+scopes:
+- scope: openid
+  description: OIDC authentication of the portal user
+  flows: [authorizationCode]
+  sources: [well-known/discover-identity-default-openid-configuration.json]
+- scope: profile
+  description: Portal user profile claims
+  flows: [authorizationCode]
+  sources: [well-known/discover-identity-default-openid-configuration.json]
+- scope: email
+  description: Portal user email claim
+  flows: [authorizationCode]
+  sources: [well-known/discover-identity-default-openid-configuration.json]
+- scope: address
+  description: Portal user address claim
+  flows: [authorizationCode]
+  sources: [well-known/discover-identity-default-openid-configuration.json]
+- scope: phone
+  description: Portal user phone claim
+  flows: [authorizationCode]
+  sources: [well-known/discover-identity-default-openid-configuration.json]
+- scope: offline_access
+  description: Refresh-token issuance for the portal session
+  flows: [authorizationCode]
+  sources: [well-known/discover-identity-default-openid-configuration.json]
+- scope: device_sso
+  description: Okta device single sign-on
+  flows: [authorizationCode]
+  sources: [well-known/discover-identity-default-openid-configuration.json]
+- scope: interclient_access
+  description: Okta inter-client token exchange
+  flows: [authorizationCode]
+  sources: [well-known/discover-identity-default-openid-configuration.json]
+gaps:
+- id: api-scope-catalogue-unpublished
+  detail: >-
+    No public list of the DISCOVER_SCOPE_NAME values a partner can request. A prospective
+    integrator cannot see, before signing, what authorization granularity each API product offers.

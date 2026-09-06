@@ -4,145 +4,66 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Discover
 providerId: discover
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+modified: '2026-09-06'
+generated: '2026-09-06'
+method: searched
+source: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide#22-api-plans
 tags:
   - Credit Cards
   - Rate Limiting
   - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Discover API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
+description: >-
+  Published rate-limit posture for the Discover Global Network API surface, read from Discover's own
+  public developer guide and product API Specs tabs on 2026-09-06. This file REPLACES a 2026-05-04
+  bulk-sweep scaffold that asserted Free/Professional/Enterprise tiers (10/100/1000 rpm, 1k/100k
+  monthly quotas) and X-RateLimit-* response headers. Discover publishes none of that. Nothing in
+  that scaffold came from Discover and it has been removed rather than carried forward.
+limit_count: 0
+limits: []
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  published: false
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: null
+  policy: null
+  note: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header is documented anywhere on Discover's public
+    surface, and no 429 semantics are described. An agent gets no runtime backpressure signal it can
+    read.
 responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
-limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Discover HCE Wallet Services
-      - Discover SE Wallet Services
-      - Discover Side-By-Side Token Services
-      - Discover Stored Payment Tokens
-      - Discover Airport Lounge & Travel Program
-      - Discover ATM Locator
-      - Discover DCI Customer Service
-      - Discover Enhanced Decisioning API
-      - Discover Fraud Alerts
-      - Discover Country Acceptance
-      - Discover Currency Converter
-      - Discover Tip Etiquette
-      - Discover Travel Guides
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Discover HCE Wallet Services
-      - Discover SE Wallet Services
-      - Discover Side-By-Side Token Services
-      - Discover Stored Payment Tokens
-      - Discover Airport Lounge & Travel Program
-      - Discover ATM Locator
-      - Discover DCI Customer Service
-      - Discover Enhanced Decisioning API
-      - Discover Fraud Alerts
-      - Discover Country Acceptance
-      - Discover Currency Converter
-      - Discover Tip Etiquette
-      - Discover Travel Guides
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Discover HCE Wallet Services
-      - Discover SE Wallet Services
-      - Discover Side-By-Side Token Services
-      - Discover Stored Payment Tokens
-      - Discover Airport Lounge & Travel Program
-      - Discover ATM Locator
-      - Discover DCI Customer Service
-      - Discover Enhanced Decisioning API
-      - Discover Fraud Alerts
-      - Discover Country Acceptance
-      - Discover Currency Converter
-      - Discover Tip Etiquette
-      - Discover Travel Guides
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Discover HCE Wallet Services
-      - Discover SE Wallet Services
-      - Discover Side-By-Side Token Services
-      - Discover Stored Payment Tokens
-      - Discover Airport Lounge & Travel Program
-      - Discover ATM Locator
-      - Discover DCI Customer Service
-      - Discover Enhanced Decisioning API
-      - Discover Fraud Alerts
-      - Discover Country Acceptance
-      - Discover Currency Converter
-      - Discover Tip Etiquette
-      - Discover Travel Guides
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Discover HCE Wallet Services
-      - Discover SE Wallet Services
-      - Discover Side-By-Side Token Services
-      - Discover Stored Payment Tokens
-      - Discover Airport Lounge & Travel Program
-      - Discover ATM Locator
-      - Discover DCI Customer Service
-      - Discover Enhanced Decisioning API
-      - Discover Fraud Alerts
-      - Discover Country Acceptance
-      - Discover Currency Converter
-      - Discover Tip Etiquette
-      - Discover Travel Guides
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  throttled: null
+  note: 429 is not listed in Discover's published HTTP status-code table, which covers 200, 400,
+    401, 404, 405, 500 and 503 only.
+mechanism:
+  name: API Plan
+  header: X-DFS-API-PLAN
+  published_statement: >-
+    "Each partner application is assigned specific API Plans which control routing to specific end
+    points, rate limits, quotas and how the service is accessed. These API Plans match the service
+    agreements signed between the partners and Discover."
+  detail: >-
+    Rate limits and quotas therefore exist and are real, but they are contractual values set per
+    partner in the service agreement and disclosed in the Discover Developer Center after
+    onboarding. No numeric limit is public for any product.
+  plan_values_public: false
+  source: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide#22-api-plans
+related_error_codes:
+  - code: '10111'
+    message: The one-time password (OTP) request limit was reached. Often a rate limit issue.
+    note: the only rate-limit-shaped code in Discover's published error registry, and it is scoped
+      to OTP rather than to the API as a whole
+  - code: '10018'
+    message: Device has reached provisioning limit.
+  - code: '10003'
+    message: PAN provisioning count exceeded.
+  - code: '10122'
+    message: The request failed because the data sent in the request is too large.
+    http_status: 413
+gaps:
+  - No numeric rate limit or quota is published for any Discover API product.
+  - No rate-limit response headers.
+  - No documented 429 or Retry-After behaviour.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

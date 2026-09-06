@@ -1,0 +1,72 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  npm registry (registry.npmjs.org), PyPI, RubyGems, crates.io, pkg.go.dev, Maven Central, NuGet,
+  Packagist, the github.com/discoverfinancial organisation and the Discover Partner Product Portal
+  developer guide
+note: >-
+  Discover ships NO first-party client library for any Discover Global Network API. The developer
+  guide's "Code examples" sections are pseudocode and cURL only (section 5.5, 6.4, 10.x); there is
+  no SDK download, no package name and no code-generation offer anywhere on the public surface.
+  The one first-party package that does exist on a public registry is an accessibility design-system
+  SDK, unrelated to the payment APIs, and it is archived. Because no API client library exists, no
+  `SDKs` pointer is emitted for this record.
+sdk_count: 0
+api_client_libraries: []
+packages:
+- language: typescript
+  registry: npm
+  name: a11y-theme-builder-sdk
+  url: https://www.npmjs.com/package/a11y-theme-builder-sdk
+  install: npm install a11y-theme-builder-sdk
+  official: true
+  official_basis: >-
+    npm author email is on the discover.com domain and the package name matches the archived
+    github.com/discoverfinancial/a11y-theme-builder-sdk repository.
+  api_client: false
+  purpose: Accessibility Theme Builder SDK - a design-system/theming library, not a client for any
+    Discover API.
+  version: 0.0.22
+  published: '2023-10-12'
+  status: abandoned
+  status_evidence: >-
+    Last publish 2023-10-12. The backing GitHub repository is archived and its description reads
+    "Due to changes in priorities, this project is no longer being supported."
+registries_checked:
+- registry: npm
+  query: a11y-theme-builder-sdk; text search "discoverfinancial"
+  result: one first-party package (above); no Discover API client
+- registry: pypi
+  result: no first-party Discover package found
+- registry: rubygems
+  result: no first-party Discover package found
+- registry: crates.io
+  result: no first-party Discover package found
+- registry: maven-central
+  result: no first-party Discover package found
+- registry: nuget
+  result: no first-party Discover package found
+- registry: pkg.go.dev
+  result: no first-party Discover package found
+- registry: packagist
+  result: no first-party Discover package found
+github_organization:
+  url: https://github.com/discoverfinancial
+  public_repos: 8
+  checked: '2026-09-06'
+  finding: >-
+    All eight public repositories carry the same description - "Due to changes in priorities, this
+    project is no longer being supported" - and were last updated 2026-06-12. None contains an
+    OpenAPI, AsyncAPI, .proto or WSDL file (git trees inspected for ods-framework, dlms-server and
+    spring-http-conn). The org holds an accessibility theme builder, an open data services
+    framework, a digital lending management sample and a Spring HTTP connector - no payment API
+    tooling.
+  repos:
+  - ods-sample
+  - spring-http-conn
+  - ods-framework
+  - dlms-server
+  - dlms-sample
+  - a11y-theme-builder-sdk
+  - a11y-theme-builder
+  - .github

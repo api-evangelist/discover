@@ -1,0 +1,109 @@
+generated: '2026-09-06'
+method: searched
+source: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide
+docs: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide
+note: >-
+  Discover publishes no OpenAPI, so nothing here is derived from a spec. Every field below is read
+  from the Discover Partner Product Portal developer guide, which is public and server-rendered,
+  and from live anonymous probes of apis.discover.com. Section numbers refer to that guide.
+summary:
+  types: [oauth2, mutualTLS, http, x509-certificate, jwt-second-factor]
+  api_key_in: []
+  oauth2_flows: [clientCredentials]
+  payload_security: [JWE, JWS, nested-JWT-JWS-in-JWE, field-level-encryption]
+  transport: TLS 1.2 or TLS 1.3 required
+schemes:
+- name: OAuth2ClientCredentials
+  type: oauth2
+  flow: clientCredentials
+  token_url: https://apis.discover.com/auth/oauth/v2/token
+  token_type: Bearer
+  expires_in_seconds: 3600
+  client_authentication: HTTP Basic (base64 client_id:client_secret) or form body
+  request_content_type: application/x-www-form-urlencoded
+  required_body: grant_type=client_credentials&scope=<SCOPE_NAME>
+  required_headers:
+  - X-DFS-API-PLAN
+  usage: 'Authorization: Bearer <access_token>'
+  source_section: '5. How to use OAuth 2 - Client Credentials'
+- name: SecondFactorJWT
+  type: jwt
+  in: header
+  header: X-DFS-C-APP-JWT
+  description: >-
+    A JWS token the partner signs with its registered PARTNER_SIGNATURE_CERT private key and sends
+    as a second authentication factor on APIs that require it. Header carries typ, alg (RS256) and
+    kid; claims include a SHA-256 content_hash of the request body.
+  source_section: '7. How to use Second Factor JWT'
+- name: ConsumerApplicationCertificate
+  type: x509-certificate
+  in: header
+  header: X-DFS-C-APP-CERT
+  description: A Discover-issued consumer application certificate presented as a second
+    authentication factor on APIs that require it.
+  source_section: '6. How to use Consumer Application Certificate'
+- name: MutualTLS
+  type: mutualTLS
+  description: >-
+    mTLS with a partner-supplied X.509 SSL certificate, used per API and for Discover's outgoing
+    (webhook / notification) calls back to the partner.
+  source_section: '3. Security Methods Overview / 9. Outgoing API Authentication'
+payload_protection:
+  jwe:
+    purpose: payload and field-level encryption of requests and responses
+    keys: Discover JWE public key + partner JWE public key exchanged at registration
+  jws:
+    purpose: payload signature and non-repudiation; Discover also signs its responses
+    algorithm: RS256
+  nested_jwt: JWS signed payload nested inside a JWE (JWS-in-JWE)
+  hashing: SHA-256 content_hash claim over the UTF-8 request body
+jwks:
+  endpoints:
+  - url: https://apis.discover.com/dfs/jwk/v1/public-keys
+    status: 200
+    anonymous: true
+    probed: '2026-09-06'
+  - url: https://apis.discover.com/dfs/certs/v1/jwks.json?client_id=<your_client_id>
+    status: 200
+    anonymous: true
+    probed: '2026-09-06'
+    note: the documented form takes a client_id query parameter; the bare path also answers 200
+  - url: https://sandbox.apis.discover.com/dfs/jwk/v1/public-keys
+    status: 200
+    anonymous: true
+    probed: '2026-09-06'
+  file: authentication/discover-jwks.json
+  key_rotation: JWKS endpoint keys expire every 90 days
+  key_uses: [sig, enc]
+per_api_security:
+  note: read from the "Security Methods Overview" table in section 3 of the developer guide
+  matrix:
+  - api: Discover Stored Token Services (DSTS)
+    request_authentication: OAuth 2 Client Credentials + Second Factor JWT
+    payload_encryption: JWE
+    outgoing_api_security: mTLS
+  - api: Side-by-Side Token Services (SXS)
+    request_authentication: OAuth 2 Client Credentials + Second Factor JWT
+    payload_encryption: JWE
+    outgoing_api_security: mTLS
+  - api: Discover Enhanced Decisioning (DED)
+    request_authentication: OAuth 2 Client Credentials + Consumer Application Certificate
+    payload_encryption: null
+    outgoing_api_security: null
+identity_provider:
+  partner_portal:
+    issuer: https://identity.discoverglobalnetwork.com/oauth2/default
+    org_issuer: https://identity.discoverglobalnetwork.com
+    vendor: Okta
+    discovery: well-known/discover-identity-openid-configuration.json
+    note: >-
+      This is the human sign-in for the Discover Partner Product Portal and Developer Center, not
+      the API gateway's token endpoint. API access tokens come from
+      https://apis.discover.com/auth/oauth/v2/token.
+onboarding:
+  self_service: false
+  detail: >-
+    "Currently, portal access is by invitation only." Partners self-register at
+    developer.discover.com only after a Discover representative sends an invitation; client_id,
+    client_secret, API scopes, API plan and certificates are then issued per environment.
+  source: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide

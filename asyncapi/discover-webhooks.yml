@@ -1,0 +1,50 @@
+generated: '2026-09-06'
+method: searched
+source: https://partner.discoverglobalnetwork.com/products/discover-stored-token-services?tab=api-specs
+docs: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide#9-outgoing-api-authentication
+spec_type: none
+asyncapi_published: false
+note: >-
+  Discover documents a real outbound event surface but publishes no AsyncAPI document, no event
+  catalogue and no payload schemas for it. Nothing is fabricated here - this file records the
+  webhook surface exactly as Discover describes it and marks the gaps.
+webhooks:
+- name: Account Notification API
+  direction: outbound
+  transport: HTTPS webhook - Discover calls an endpoint the token requestor hosts
+  description: >-
+    "The Account Notification API connects DFS Services LLC with the token requestor by
+    transmitting issuer-initiated updates applied to Cardholder accounts."
+  requirement: >-
+    "Token requestors must integrate with this endpoint to receive issuer notifications via
+    webhooks."
+  product: Discover Stored Token Services (DSTS)
+  event_catalog_published: false
+  payload_schema_published: false
+  source: https://partner.discoverglobalnetwork.com/products/discover-stored-token-services?tab=api-specs
+security:
+  model: Outgoing API Authentication
+  mechanisms:
+  - mutual TLS 1.2 / 1.3 with a root CA and a partner client certificate
+  - Second Factor JWT (JWS) signed by Discover, validated by the partner against the Discover
+    JWS public keys and KID
+  - JWE payload encryption where the notification carries sensitive data
+  signature_verification: >-
+    Partners validate Discover-signed responses and outbound calls with the Discover JWS public
+    keys published at the JWKS endpoint (authentication/discover-jwks.json).
+  source: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide#9-outgoing-api-authentication
+delivery:
+  retry_policy_published: false
+  ordering_published: false
+  replay_published: false
+  signature_header_published: false
+related_polling_surfaces:
+- POST /globalpymt/ddx/stored-payment-token/aggregator/v1/tokens/state
+- POST /globalpymt/ddx/stored-payment-token/operations/v1/token/state
+- POST /globalpymt/ddx/stored-payment-token/operations/v1/request/{requestId}/task/{taskId}/tokens/task-status
+gaps:
+- No AsyncAPI document.
+- No named event types and no notification payload schema.
+- No retry, ordering, replay or signature-header contract for webhook delivery.
+- The subscriber-side endpoint contract (what URL Discover calls, how it is registered) is not
+  published - it is settled inside partner onboarding.

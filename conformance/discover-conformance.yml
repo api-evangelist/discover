@@ -1,0 +1,133 @@
+generated: '2026-09-06'
+method: searched
+source: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide
+note: >-
+  Discover publishes no OpenAPI, so nothing here is derived from a spec. Every `conforms: true`
+  below points at a specific statement in Discover's public developer guide or product API Specs
+  content, or at a live probe recorded in this repo. Standards Discover does not name are recorded
+  as unknown rather than false where absence of a claim is not evidence of absence.
+standards:
+- id: oauth2
+  conforms: true
+  evidence: >-
+    OAuth 2.0 client-credentials grant documented in full, with token endpoint
+    https://apis.discover.com/auth/oauth/v2/token, Basic client authentication, expires_in 3600
+    and a Bearer Authorization header (developer guide section 5).
+- id: rfc6749-client-credentials
+  conforms: true
+  evidence: developer guide section 5.3 - grant_type=client_credentials with client_id/client_secret
+- id: oidc-discovery
+  conforms: true
+  evidence: >-
+    https://identity.discoverglobalnetwork.com/.well-known/openid-configuration returns 200
+    (probed 2026-09-06). Discover's Okta tenant is the sign-in for the partner portal and
+    Developer Center.
+- id: rfc8414-authorization-server-metadata
+  conforms: true
+  evidence: https://identity.discoverglobalnetwork.com/.well-known/oauth-authorization-server
+    returns 200 (probed 2026-09-06)
+- id: rfc7517-jwk
+  conforms: true
+  evidence: >-
+    Anonymous JWKS at https://apis.discover.com/dfs/jwk/v1/public-keys and
+    /dfs/certs/v1/jwks.json (probed 2026-09-06, saved to authentication/discover-jwks.json);
+    documented in developer guide section 4.5 with 90-day key expiry.
+- id: rfc7515-jws
+  conforms: true
+  evidence: developer guide section 7 and 8 - RS256 JWS with typ/alg/kid header, base64url triple
+    structure, used for the second-factor token and payload signature
+- id: rfc7516-jwe
+  conforms: true
+  evidence: developer guide section 8.3 - JWE payload encryption with alg/enc/iv/ciphertext/tag
+- id: nested-jwt-jws-in-jwe
+  conforms: true
+  evidence: developer guide section 8.4
+- id: mutual-tls
+  conforms: true
+  evidence: developer guide section 3 and 4.7 - partner-supplied X.509 SSL certificate; mTLS is
+    the outgoing-API security for DSTS and SXS
+- id: tls-1.2-minimum
+  conforms: true
+  evidence: '"Partners must set their TLS version to 1.2 or 1.3 to connect to Discover product APIs."'
+- id: emv-emvco-tokenization
+  conforms: true
+  domain_standard: true
+  evidence: >-
+    The Discover Stored Token Services contract declares EMVCo tokenization vocabulary directly in
+    its payload fields - `tokenAssuranceMethod` is documented as "The Europay Mastercard Visa
+    Consortium (EMVCo) token assurance method code. 01=non-card issuer", alongside
+    `tokenRequestorId`, `tokenRequestorPartyId`, `tokenReferenceId`, `tokenAssuranceContext` and a
+    Token Requestor / Token Requestor Aggregator / TSP role model. Payment Account Reference (PAR)
+    is a first-class product.
+  source: https://partner.discoverglobalnetwork.com/products/discover-stored-token-services?tab=api-specs
+- id: emvco-payment-account-reference
+  conforms: true
+  domain_standard: true
+  evidence: >-
+    Payment Account Reference is shipped as its own API product - "a unique value of a card account
+    which allows a Merchant or solution provider to correlate transactions regardless of whether a
+    payment token or PAN is used" - and PAR appears in the error registry (10005 "PAR doesn't
+    exist").
+  source: https://partner.discoverglobalnetwork.com/products/payment-account-reference?tab=overview
+- id: iso-4217
+  conforms: true
+  evidence: '`transactionCurrencyCode` documented as "The ISO 4217 currency code"'
+- id: iso-8601
+  conforms: true
+  evidence: '`transactionTimestamp` and healthcheck `timestamp` documented as ISO 8601'
+- id: luhn
+  conforms: true
+  evidence: Account Updater error 10001 "returned when basic validation on the PAN is performed
+    such as a Luhn check"; error 70004 "Luhn validation check failed for the PAN"
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: errors are a bespoke {code, message} MessageInfo envelope, not application/problem+json
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: no deprecation or sunset policy or header is published
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt 404s on every Discover host probed 2026-09-06, although a
+    real responsible-disclosure programme exists at www.discover.com/responsible-disclosure
+- id: graphql
+  conforms: false
+  evidence: >-
+    Discover publishes no GraphQL endpoint. NOTE: this repository previously carried
+    graphql/discover-graphql.md and graphql/discover-schema.graphql, a 57-type "conceptual" schema
+    that declared itself "derived from Discover's publicly documented REST APIs" - i.e. authored by
+    this pipeline, not published by Discover - and it was wired into apis.yml as `type: GraphQL` on
+    the HCE Wallet Services entry. Both files and the pointer were removed on 2026-09-06 because the
+    artifact asserted a contract Discover does not ship.
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI/Swagger document is published anywhere on the public surface. The rebuilt Developer
+    Center advertises "interactive OpenAPI documentation" but every API page is behind the
+    invitation-only login (403 Access denied on developer.discover.com/api/*/documentation,
+    probed 2026-09-06).
+- id: asyncapi
+  conforms: false
+  evidence: webhooks are documented for the Account Notification API but no AsyncAPI document is
+    published
+- id: pci-dss
+  conforms: unknown
+  evidence: >-
+    Not claimed anywhere in the developer documentation. Discover Global Network is a card network
+    and PCI DSS applies to it as a matter of card-brand rules, but no certification statement or
+    trust page is published on the public developer surface, so this is recorded as unknown rather
+    than asserted.
+- id: iso-20022
+  conforms: unknown
+  evidence: not named in any public Discover developer documentation
+- id: 3-d-secure
+  conforms: unknown
+  evidence: not named in the public partner portal API documentation
+- id: psd2-sca
+  conforms: unknown
+  evidence: not named; Discover's published API surface is US-network-centric
+compliance_program:
+  published: false
+  detail: >-
+    No trust centre, no certification page and no compliance page on discoverglobalnetwork.com or
+    partner.discoverglobalnetwork.com (probed 2026-09-06: /trust 404, /compliance 404,
+    /security 404). probe-security-programs.py found no trust centre either.

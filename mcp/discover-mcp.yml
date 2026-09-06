@@ -1,0 +1,35 @@
+generated: '2026-09-06'
+method: searched
+status: none
+source: >-
+  Discover Partner Product Portal, Discover Developer Center, github.com/discoverfinancial, npm and
+  web search
+note: >-
+  Discover publishes no MCP server - no hosted endpoint, no stdio package, and no agent-facing
+  documentation of any kind. No candidate tool list is derived either, because Discover publishes
+  no OpenAPI to derive one from; the endpoint paths captured in this repo come from prose
+  documentation, and inventing tool schemas on top of them would fabricate an input contract.
+  No `MCPServer` pointer is wired into apis.yml for this record - recording the absence is the
+  finding.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+server: null
+tools: []
+checked:
+- surface: github.com/discoverfinancial
+  result: 8 archived repositories, none MCP-related
+  checked: '2026-09-06'
+- surface: registry.npmjs.org text search
+  result: no Discover MCP package
+  checked: '2026-09-06'
+- surface: partner.discoverglobalnetwork.com + developer.discover.com
+  result: no MCP, agent or AI integration documentation
+  checked: '2026-09-06'
+blockers:
+- The API documentation an MCP server would wrap is itself behind an invitation-only login.
+- No OpenAPI exists to generate tool input schemas from.

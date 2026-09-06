@@ -6,175 +6,351 @@ apis:
   tags:
   - Credit Cards
   - Wallets
+  - Tokenization
+  - Payments
+  - Mobile
   humanURL: https://partner.discoverglobalnetwork.com/products/hce-wallet-services?tab=overview
   properties:
   - url: https://partner.discoverglobalnetwork.com/products/hce-wallet-services?tab=api-specs
     type: Documentation
-  - url: graphql/discover-graphql.md
-    type: GraphQL
-  description: Discover HCE Wallet Services offers a secure and convenient way for
-    customers to add their Discover card to their mobile devices for contactless payments.
-    By utilizing Host Card Emulation (HCE) technology, customers can easily make purchases
-    at millions of locations without needing to physically swipe or insert their card.
-    This service provides peace of mind through advanced security features and encryption
-    protocols to protect sensitive payment information.
+  - url: https://partner.discoverglobalnetwork.com/products/hce-wallet-services?tab=api-specs
+    type: APIReference
+  description: Discover HCE Wallet Services offers a secure and convenient way for customers to add
+    their Discover card to their mobile devices for contactless payments. By utilizing Host Card
+    Emulation (HCE) technology, customers can easily make purchases at millions of locations without
+    needing to physically swipe or insert their card. This service provides peace of mind through
+    advanced security features and encryption protocols to protect sensitive payment information.
+  baseURL: https://apis.discover.com
 - aid: discover:discover-se-wallet-services
   name: Discover SE Wallet Services
-  tags: []
+  tags:
+  - Credit Cards
+  - Wallets
+  - Tokenization
+  - Payments
+  - Secure Element
   humanURL: https://partner.discoverglobalnetwork.com/products/se-wallet-services?tab=overview
   properties:
   - url: https://partner.discoverglobalnetwork.com/products/se-wallet-services?tab=overview
     type: Documentation
-  description: Discover SE Wallet Services is a leading financial technology company
-    that specializes in providing secure and innovative digital wallet solutions for
-    consumers. Our platform enables users to store and manage their payment information,
-    loyalty cards, and coupons in one convenient and secure location. With Discover
-    SE Wallet Services, customers can easily make payments, track their spending,
-    and access exclusive offers and discounts from their favorite retailers.
+  - url: https://partner.discoverglobalnetwork.com/products/se-wallet-services?tab=api-specs
+    type: APIReference
+  description: Discover SE Wallet Services is a leading financial technology company that specializes
+    in providing secure and innovative digital wallet solutions for consumers. Our platform enables
+    users to store and manage their payment information, loyalty cards, and coupons in one convenient
+    and secure location. With Discover SE Wallet Services, customers can easily make payments, track
+    their spending, and access exclusive offers and discounts from their favorite retailers.
+  baseURL: https://apis.discover.com
 - aid: discover:discover-side-by-side-token-services
   name: Discover Side-By-Side Token Services
-  tags: []
+  tags:
+  - Tokenization
+  - Payments
+  - Debit
+  - Routing
+  - Security
   humanURL: https://partner.discoverglobalnetwork.com/products/sxs-token-services?tab=overview
   properties:
   - url: https://partner.discoverglobalnetwork.com/products/sxs-token-services
     type: Documentation
-  description: SXS tokens are alternate tokens provisioned by a Token Requestor in
-    addition to primary tokens they provisioned from front-of-card brands. As the
-    primary token may be subject to routing and security enforcement restrictions,
-    the alternate token (SXS) provides both routing support and security enforcement
-    to participating Debit Networks.
+  - url: https://partner.discoverglobalnetwork.com/products/sxs-token-services?tab=api-specs
+    type: APIReference
+  description: SXS tokens are alternate tokens provisioned by a Token Requestor in addition to primary
+    tokens they provisioned from front-of-card brands. As the primary token may be subject to routing
+    and security enforcement restrictions, the alternate token (SXS) provides both routing support
+    and security enforcement to participating Debit Networks.
+  baseURL: https://apis.discover.com
 - aid: discover:discover-stored-payment-tokens
-  name: Discover Stored Payment Tokens
-  tags: []
-  humanURL: https://partner.discoverglobalnetwork.com/products/stored-payment-tokens?tab=overview
+  name: Discover Stored Token Services
+  tags:
+  - Payments
+  - Tokenization
+  - Credit Cards
+  - Card Network
+  - Security
+  humanURL: https://partner.discoverglobalnetwork.com/products/discover-stored-token-services?tab=overview
   properties:
-  - url: https://www.discoverglobalnetwork.com/solutions/fraud-security/stored-payment-tokens/
+  - url: https://partner.discoverglobalnetwork.com/products/discover-stored-token-services?tab=overview
     type: Documentation
-  description: Discover Stored Payment Tokens is a secure way for customers to store
-    their payment information for future use. By tokenizing the payment data, sensitive
-    information such as credit card numbers are replaced with a unique identifier,
-    reducing the risk of fraud and unauthorized access. This technology allows customers
-    to make quick and seamless transactions without having to re-enter their payment
-    details each time.
+  - url: https://partner.discoverglobalnetwork.com/products/discover-stored-token-services?tab=api-specs
+    type: APIReference
+  - url: https://www.discoverglobalnetwork.com/solutions/fraud-security/stored-payment-tokens/
+    type: Solutions
+  description: Discover Stored Token Services (DSTS) replaces a customer's Primary Account Number
+    (PAN) with a unique, secure payment token at checkout, for card-on-file, wallet and in-app commerce.
+    The API surface covers token requestor boarding, token provisioning and lifecycle state changes
+    (link, unlink, suspend, resume), cryptogram generation for tokenized transactions, card asset
+    retrieval and an Account Notification webhook that carries issuer-initiated account updates back
+    to the token requestor. Requests use OAuth 2.0 client credentials plus a second-factor JWT, JWE
+    payload encryption and mTLS on Discover's outgoing calls. Formerly listed as Discover Stored
+    Payment Tokens; the /products/stored-payment-tokens page no longer resolves.
+  baseURL: https://apis.discover.com
 - aid: discover:discover-airport-lounge-travel-program
   name: Discover Airport Lounge & Travel Program
-  tags: []
+  tags:
+  - Travel
+  - Diners Club
+  - Lounges
+  - Benefits
+  - Cardmember
   humanURL: https://partner.discoverglobalnetwork.com/products/airport-lounge-locator?tab=overview
   properties:
   - url: https://partner.discoverglobalnetwork.com/products/airport-lounge-locator
     type: Documentation
-  description: Discover Airport Lounge & Travel Program provides exclusive access
-    to premium airport lounges worldwide, offering travelers a comfortable and luxurious
-    space to relax and unwind before their flight. Members can enjoy amenities such
-    as complimentary food and beverages, high-speed Wi-Fi, private workstations, and
-    shower facilities. Additionally, the program offers special discounts and perks
-    on various travel services, including airport transfers, car rentals, and hotel
-    accommodations.
+  - url: https://partner.discoverglobalnetwork.com/products/airport-lounge-locator?tab=api-specs
+    type: APIReference
+  description: Discover Airport Lounge & Travel Program provides exclusive access to premium airport
+    lounges worldwide, offering travelers a comfortable and luxurious space to relax and unwind before
+    their flight. Members can enjoy amenities such as complimentary food and beverages, high-speed
+    Wi-Fi, private workstations, and shower facilities. Additionally, the program offers special
+    discounts and perks on various travel services, including airport transfers, car rentals, and
+    hotel accommodations.
 - aid: discover:discover-atm-locator
   name: Discover ATM Locator
-  tags: []
+  tags:
+  - ATM
+  - Location
+  - Travel
+  - Cardmember
+  - Acceptance
   humanURL: https://partner.discoverglobalnetwork.com/products/atm-locator?tab=overview
   properties:
   - url: https://partner.discoverglobalnetwork.com/products/atm-locator
     type: Documentation
-  description: Discover ATM Locator is a user-friendly tool that allows cardholders
-    to easily find nearby ATMs where they can access their accounts and withdraw cash.
-    By simply entering their location or zip code, users can quickly locate the closest
-    ATM that accepts Discover cards. The service provides detailed information about
-    the ATM's location, operating hours, and any associated fees, ensuring that cardholders
-    can make informed decisions about where to withdraw money.
+  - url: https://partner.discoverglobalnetwork.com/products/atm-locator?tab=api-specs
+    type: APIReference
+  description: Discover ATM Locator is a user-friendly tool that allows cardholders to easily find
+    nearby ATMs where they can access their accounts and withdraw cash. By simply entering their
+    location or zip code, users can quickly locate the closest ATM that accepts Discover cards. The
+    service provides detailed information about the ATM's location, operating hours, and any associated
+    fees, ensuring that cardholders can make informed decisions about where to withdraw money.
 - aid: discover:discover-dci-customer-service
-  name: Discover DCI Customer Service
-  tags: []
-  humanURL: https://partner.discoverglobalnetwork.com/products/dci-customer-service?tab=overview
+  name: Diners Club International Customer Service
+  tags:
+  - Customer Service
+  - Diners Club
+  - Credit Cards
+  - Cardmember Support
+  - Travel
+  humanURL: https://partner.discoverglobalnetwork.com/products/diners-club-international-customer-service?tab=overview
   properties:
-  - url: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide
+  - url: https://partner.discoverglobalnetwork.com/products/diners-club-international-customer-service?tab=overview
     type: Documentation
-  description: Discover DCI Customer Service is dedicated to providing exceptional
-    service to all customers who reach out for assistance. Our team is knowledgeable
-    and eager to address any questions or concerns that customers may have about their
-    accounts, products, or services. We strive to exceed expectations by offering
-    personalized solutions and ensuring a positive experience for each individual.
+  - url: https://partner.discoverglobalnetwork.com/products/diners-club-international-customer-service?tab=api-specs
+    type: APIReference
+  description: Diners Club International customer service capability offered to Diners Club franchisees
+    and partners through the Discover Global Network partner product portal. The product page is
+    published; the API specification itself sits behind the invitation-only Discover Developer Center.
+    Formerly listed under the slug dci-customer-service, whose product page no longer resolves.
 - aid: discover:discover-enhanced-decisioning-api
   name: Discover Enhanced Decisioning API
-  tags: []
+  tags:
+  - Fraud
+  - Risk
+  - Decisioning
+  - Payments
+  - Analytics
   humanURL: https://partner.discoverglobalnetwork.com/products/discover-enhanced-decisioning?tab=overview
   properties:
   - url: https://partner.discoverglobalnetwork.com/products/discover-enhanced-decisioning?tab=documentation
     type: Documentation
-  description: Discover Enhanced Decisioning API is a powerful tool that allows businesses
-    to make smarter and faster decisions by leveraging advanced data analytics and
-    machine learning algorithms. By analyzing a vast amount of data from various sources,
-    the API provides insights and recommendations to help organizations optimize their
-    decision-making processes.
+  - url: https://partner.discoverglobalnetwork.com/products/discover-enhanced-decisioning?tab=api-specs
+    type: APIReference
+  description: Discover Enhanced Decisioning API is a powerful tool that allows businesses to make
+    smarter and faster decisions by leveraging advanced data analytics and machine learning algorithms.
+    By analyzing a vast amount of data from various sources, the API provides insights and recommendations
+    to help organizations optimize their decision-making processes.
+  baseURL: https://apis.discover.com
 - aid: discover:discover-fraud-alerts
   name: Discover Fraud Alerts
-  tags: []
+  tags:
+  - Fraud
+  - Alerts
+  - Notifications
+  - Security
+  - Payments
   humanURL: https://partner.discoverglobalnetwork.com/products/fraud-alerts?tab=overview
   properties:
   - url: https://www.discover.com/credit-cards/card-smarts/fraud-faqs/
     type: Documentation
-  description: Discover Fraud Alerts is a service provided by Discover Financial Services
-    that helps protect cardholders from unauthorized and fraudulent activity on their
-    accounts. When unusual or suspicious transactions are detected, cardholders are
-    alerted via text, email, or phone call so they can take immediate action to prevent
-    any further unauthorized charges. This service helps cardholders monitor their
-    accounts more closely and allows them to quickly report any suspicious activity
-    to Discover.
+  - url: https://partner.discoverglobalnetwork.com/products/fraud-alerts?tab=api-specs
+    type: APIReference
+  description: Discover Fraud Alerts is a service provided by Discover Financial Services that helps
+    protect cardholders from unauthorized and fraudulent activity on their accounts. When unusual
+    or suspicious transactions are detected, cardholders are alerted via text, email, or phone call
+    so they can take immediate action to prevent any further unauthorized charges. This service helps
+    cardholders monitor their accounts more closely and allows them to quickly report any suspicious
+    activity to Discover.
 - aid: discover:discover-country-acceptance
   name: Discover Country Acceptance
-  tags: []
+  tags:
+  - Travel
+  - Acceptance
+  - Countries
+  - Cardmember
+  - Reference Data
   humanURL: https://partner.discoverglobalnetwork.com/products/country-acceptance?tab=overview
   properties:
   - url: https://www.discover.com/credit-cards/international-use/
     type: Documentation
-  description: Discover Country Acceptance is a financial institution that specializes
-    in providing loans to individuals in rural and underserved communities. They understand
-    the unique challenges faced by those living in these areas and strive to provide
-    affordable and accessible financing options to help them achieve their financial
-    goals. With a commitment to fairness and transparency, Discover Country Acceptance
-    works closely with each client to tailor a loan solution that meets their specific
-    needs.
+  - url: https://partner.discoverglobalnetwork.com/products/country-acceptance?tab=api-specs
+    type: APIReference
+  description: Discover Country Acceptance is a financial institution that specializes in providing
+    loans to individuals in rural and underserved communities. They understand the unique challenges
+    faced by those living in these areas and strive to provide affordable and accessible financing
+    options to help them achieve their financial goals. With a commitment to fairness and transparency,
+    Discover Country Acceptance works closely with each client to tailor a loan solution that meets
+    their specific needs.
+  baseURL: https://0wgjxu6jh2.execute-api.us-west-2.amazonaws.com/api/country-acceptance/v2
 - aid: discover:discover-currency-converter
   name: Discover Currency Converter
-  tags: []
+  tags:
+  - Currency
+  - Exchange Rates
+  - Travel
+  - Reference Data
+  - Cardmember
   humanURL: https://partner.discoverglobalnetwork.com/products/currency-converter?tab=overview
   properties:
   - url: https://partner.discoverglobalnetwork.com/products/currency-converter?tab=overview
     type: Documentation
-  description: Discover Currency Converter is a user-friendly tool that allows individuals
-    to easily convert between different currencies. With a simple interface, users
-    can input the amount of money in one currency and select the desired currency
-    they would like to convert to. The tool automatically calculates the exchange
-    rate and displays the converted amount in real-time.
+  - url: https://partner.discoverglobalnetwork.com/products/currency-converter?tab=api-specs
+    type: APIReference
+  description: Discover Currency Converter is a user-friendly tool that allows individuals to easily
+    convert between different currencies. With a simple interface, users can input the amount of
+    money in one currency and select the desired currency they would like to convert to. The tool
+    automatically calculates the exchange rate and displays the converted amount in real-time.
 - aid: discover:discover-tip-etiquette
   name: Discover Tip Etiquette
-  tags: []
+  tags:
+  - Travel
+  - Tipping
+  - Reference Data
+  - Cardmember
+  - Currency
   humanURL: https://partner.discoverglobalnetwork.com/products/tip-etiquette?tab=overview
   properties:
   - url: https://www.discover.com/online-banking/banking-topics/when-to-tip-guide/
     type: Documentation
-  description: Discover Tip Etiquette is a platform designed to educate individuals
-    on the proper etiquette and practices when it comes to tipping. This includes
-    providing guidance on how much to tip in various situations, such as at restaurants,
-    spas, salons, and for delivery services. The platform also offers advice on how
-    to tip appropriately based on the level of service received, as well as how to
-    handle situations where tipping may not be expected or customary.
+  - url: https://partner.discoverglobalnetwork.com/products/tip-etiquette?tab=api-specs
+    type: APIReference
+  description: Discover Tip Etiquette is a platform designed to educate individuals on the proper
+    etiquette and practices when it comes to tipping. This includes providing guidance on how much
+    to tip in various situations, such as at restaurants, spas, salons, and for delivery services.
+    The platform also offers advice on how to tip appropriately based on the level of service received,
+    as well as how to handle situations where tipping may not be expected or customary.
 - aid: discover:discover-travel-guides
   name: Discover Travel Guides
-  tags: []
+  tags:
+  - Travel
+  - Guides
+  - Merchants
+  - Cardmember
+  - Acceptance
   humanURL: https://partner.discoverglobalnetwork.com/products/travel-guides?tab=overview
   properties:
   - url: https://travel.discoverglobalnetwork.com/jcb/
     type: Documentation
-  description: Discover Travel Guides is a comprehensive travel planning and booking
-    service that helps travelers create unforgettable and seamless travel experiences.
-    From researching destinations and finding the best accommodations to booking flights,
-    activities, and transportation, Discover Travel Guides offers personalized recommendations
-    and expert guidance every step of the way.
+  - url: https://partner.discoverglobalnetwork.com/products/travel-guides?tab=api-specs
+    type: APIReference
+  description: Discover Travel Guides is a comprehensive travel planning and booking service that
+    helps travelers create unforgettable and seamless travel experiences. From researching destinations
+    and finding the best accommodations to booking flights, activities, and transportation, Discover
+    Travel Guides offers personalized recommendations and expert guidance every step of the way.
+- aid: discover:discover-payment-account-reference
+  name: Discover Payment Account Reference
+  tags:
+  - Payments
+  - Tokenization
+  - PAR
+  - EMVCo
+  - Reference Data
+  humanURL: https://partner.discoverglobalnetwork.com/products/payment-account-reference?tab=overview
+  baseURL: https://apis.discover.com
+  properties:
+  - url: https://partner.discoverglobalnetwork.com/products/payment-account-reference?tab=overview
+    type: Documentation
+  - url: https://partner.discoverglobalnetwork.com/products/payment-account-reference?tab=api-specs
+    type: APIReference
+  description: Payment Account Reference (PAR) gives merchants and solution providers an aggregated
+    view of a customer's account without exposing the PAN or the payment token. PAR is the EMVCo-defined
+    non-financial reference value that correlates every transaction on one card account whether it
+    was made with a PAN or with a payment token, which is what makes loyalty, dispute and risk analytics
+    work across tokenized and untokenized channels. Discover offers PAR as an optional add-on to
+    its tokenization products, and PAR absence is a first-class error condition in the Stored Token
+    Services error registry (code 10005).
+- aid: discover:discover-iin-data-lookup-service
+  name: Discover IIN Data Lookup Service
+  tags:
+  - BIN
+  - IIN
+  - Reference Data
+  - Payments
+  - Card Network
+  humanURL: https://partner.discoverglobalnetwork.com/products/iin-data-lookup?tab=overview
+  baseURL: https://rangerx-api.discoverfinancial.com/epp/rangerx/v1
+  properties:
+  - url: https://partner.discoverglobalnetwork.com/products/iin-data-lookup?tab=overview
+    type: Documentation
+  - url: https://partner.discoverglobalnetwork.com/products/iin-data-lookup?tab=api-specs
+    type: APIReference
+  description: The IIN Data Lookup Service returns up-to-date Issuer Identification Number (BIN)
+    range data so an acquirer, processor or merchant can identify the issuer, the card product and
+    the network behind a card number before routing or authorising a transaction. The published surface
+    includes a full IIN list, a simplified summary list, a per-network summary and a single-IIN lookup
+    that returns every field attribute for one range, alongside a health check. It is the one Discover
+    API product documented with real GET reads rather than the POST-dominant pattern the rest of
+    the portfolio uses.
+- aid: discover:discover-network-account-updater
+  name: Discover Network Account Updater
+  tags:
+  - Payments
+  - Recurring Billing
+  - Card on File
+  - Account Updater
+  - Credit Cards
+  humanURL: https://partner.discoverglobalnetwork.com/products/discover-network-account-updater?tab=overview
+  baseURL: https://apis.discover.com
+  properties:
+  - url: https://partner.discoverglobalnetwork.com/products/discover-network-account-updater?tab=overview
+    type: Documentation
+  - url: https://partner.discoverglobalnetwork.com/products/discover-network-account-updater?tab=api-specs
+    type: APIReference
+  description: Discover Network Account Updater keeps recurring and stored card-on-file payment credentials
+    current so merchants can keep processing payments without interruption when a card is reissued,
+    renumbered or re-expired. Requestors submit inquiry requests for enrolled accounts and receive
+    updated account information; the published error registry documents PAN validation (Luhn), cryptographic
+    failures on the encrypted account payload, and an enrollment eligibility check that rejects requestors
+    who are not boarded for Account Updater.
+- aid: discover:discover-issuer-card-account-services
+  name: Discover Issuer Card Account Services
+  tags:
+  - Issuing
+  - Card Management
+  - Payments
+  - Enrollment
+  - Credit Cards
+  humanURL: https://partner.discoverglobalnetwork.com/products/issuer-card-account-services?tab=overview
+  baseURL: https://apis.discover.com
+  properties:
+  - url: https://partner.discoverglobalnetwork.com/products/issuer-card-account-services?tab=overview
+    type: Documentation
+  - url: https://partner.discoverglobalnetwork.com/products/issuer-card-account-services?tab=api-specs
+    type: APIReference
+  description: Issuer Card Account Services (iCAS) is the Discover Global Network capability issuers
+    use to manage changes to card accounts across the life of the account. The published surface
+    documents a bulk card-account enrollment operation that also updates card product codes, with
+    validation at the account-key level and partial success allowed at the request level, plus a
+    health check. Account information must be encrypted in the request, with decryption and validation
+    performed server side.
 name: Discover
 tags:
 - Credit Cards
+- Payments
+- Card Network
+- Tokenization
+- Financial Services
+- Fraud
 - Fortune 500
 type: Index
 deliveryModel:
@@ -203,6 +379,8 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/discover.png
 access: 3rd-Party
 common:
+- type: Website
+  url: https://www.discover.com/
 - type: DomainSecurity
   url: security/discover-domain-security.yml
 - type: GitHubOrganization
@@ -212,29 +390,88 @@ common:
 - url: https://partner.discoverglobalnetwork.com/partner-resources
   name: Discover Partner Product Portal
   type: Partners
-  description: 'null'
 - url: https://partner.discoverglobalnetwork.com/faq
   name: FAQs | Discover Partner Product Portal
   type: FAQ
-  description: 'null'
 - url: https://www.discoverglobalnetwork.com/privacy-policy/
   name: Global Privacy Center | Discover Global Network
   type: PrivacyPolicy
-  description: 'null'
 - url: https://www.discoverglobalnetwork.com/terms-of-use/
   name: Terms of Use | Discover Global Network/
   type: TermsOfService
-  description: 'null'
+- url: https://partner.discoverglobalnetwork.com/
+  type: DeveloperPortal
+  name: Discover Partner Product Portal
+- url: https://developer.discover.com/home
+  type: Portal
+  name: Discover Developer Center
+- url: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide
+  type: Documentation
+  name: Discover developer guide
+- url: https://partner.discoverglobalnetwork.com/products
+  type: APIReference
+  name: Discover API product specifications
+- url: https://partner.discoverglobalnetwork.com/going-live-with-discover
+  type: GettingStarted
+  name: Going Live with Discover
+- url: https://partner.discoverglobalnetwork.com/contact-us
+  type: Support
+  name: Contact Discover partner support
+- url: https://developer.discover.com/user/login
+  type: Login
+  name: Discover Developer Center log in
+- url: https://www.discover.com/responsible-disclosure
+  type: Security
+  name: Discover Responsible Disclosure
+- url: security/discover-vulnerability-disclosure.yml
+  type: VulnerabilityDisclosure
+- url: authentication/discover-authentication.yml
+  type: Authentication
+- url: scopes/discover-scopes.yml
+  type: OAuthScopes
+- url: conventions/discover-conventions.yml
+  type: Conventions
+- url: errors/discover-problem-types.yml
+  type: ErrorCatalog
+- url: errors/discover-error-codes.yml
+  type: ErrorCodes
+- url: lifecycle/discover-lifecycle.yml
+  type: Lifecycle
+- url: conformance/discover-conformance.yml
+  type: Conformance
+- url: sandbox/discover-sandbox.yml
+  type: Sandbox
+- url: packages/discover-packages.yml
+  type: Packages
+- url: well-known/discover-well-known.yml
+  type: WellKnown
+- url: rate-limits/discover-rate-limits.yml
+  type: RateLimits
+- url: plans/discover-plans-pricing.yml
+  type: Plans
+- url: asyncapi/discover-webhooks.yml
+  type: Webhooks
+- url: llms/discover-llms.txt
+  type: LLMsTxt
+- url: finops/discover-finops.yml
+  type: FinOps
 created: '2024-11-15T00:00:00.000Z'
-modified: '2026-04-28'
+modified: '2026-09-06'
 position: Consuming
-description: Discover is a financial services company that offers a range of products
-  and services to help individuals manage their money. They provide credit cards,
-  personal loans, home equity loans, and savings and checking accounts. Discover also
-  operates an online banking platform that allows customers to easily access and manage
-  their accounts from anywhere. Additionally, Discover offers cash back rewards and
-  other perks to help customers make the most of their finances.
+description: 'Discover Financial Services is a US consumer bank and payments network - credit cards,
+  personal loans, student loans, home equity loans, and online savings and checking accounts - and,
+  through Discover Global Network, one of the four global card acceptance networks, alongside the
+  Diners Club International and PULSE brands. Its developer-facing business is the network side:
+  issuers, acquirers, processors, wallet providers and token requestors integrate through the Discover
+  Partner Product Portal and the invitation-only Discover Developer Center for tokenization, account
+  updating, IIN/BIN lookup, fraud alerts, enhanced decisioning and a set of travel and acceptance
+  tools. Discover''s footer now reads "Discover, a division of Capital One, N.A., Member FDIC".'
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 specificationVersion: '0.23'
+x-enrichment:
+  date: '2026-09-06'
+  status: enriched
+  artifacts_added: 19
+  pass: local-v3

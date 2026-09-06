@@ -1,13 +1,29 @@
-generated: '2026-07-11'
+generated: '2026-09-06'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
+- host: developer.discover.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb 20 23:59:59 2027 GMT
+  hsts: null
 - host: partner.discoverglobalnetwork.com
   https: true
   tls_version: TLSv1.3
   cert_expires: Mar  1 23:59:59 2027 GMT
   hsts: false
+- host: apis.discover.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb 20 23:59:59 2027 GMT
+  hsts: null
 domains:
+- domain: discover.com
+  dnssec: true
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
 - domain: discoverglobalnetwork.com
   dnssec: true
   caa: []

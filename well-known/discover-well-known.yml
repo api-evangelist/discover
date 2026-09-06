@@ -1,0 +1,265 @@
+generated: '2026-09-06'
+method: probed
+source: live HTTPS probes of every host this record knows (registrable domains, developer/partner
+  portals, the published API gateway hosts apis.discover.com + sandbox.apis.discover.com, and the
+  Okta identity host named in the partner portal bootstrap payload)
+note: >-
+  Only identity.discoverglobalnetwork.com serves real /.well-known documents. It is Discover's own
+  Okta tenant and is the authorization server the Discover Partner Product Portal boots against
+  (oktaIssuer https://identity.discoverglobalnetwork.com/oauth2/default, read from the partner
+  portal's own RSC payload). Both the org-level and the "default" custom authorization server
+  publish RFC 8414 / OIDC discovery anonymously. Every other host 404s the whole named path list.
+  travel.discoverglobalnetwork.com is a single-page-app catch-all that answers 200 with the same
+  8,371-byte HTML shell for every path, so nothing there is recorded as a document.
+path_echo_control: passed
+hosts:
+- host: https://identity.discoverglobalnetwork.com
+  hit_count: 4
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: discover-identity-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: discover-identity-oauth-authorization-server.json
+  - path: /oauth2/default/.well-known/openid-configuration
+    status: 200
+    file: discover-identity-default-openid-configuration.json
+  - path: /oauth2/default/.well-known/oauth-authorization-server
+    status: 200
+    file: discover-identity-default-oauth-authorization-server.json
+  - path: /.well-known/security.txt
+    status: 405
+  - path: /.well-known/oauth-protected-resource
+    status: 405
+  - path: /.well-known/api-catalog
+    status: 405
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/discover-negative-control-7f3ab91c.json
+    status: 404
+    note: negative control - correct 404, this host does not echo paths
+- host: https://apis.discover.com
+  hit_count: 0
+  note: >-
+    Discover's production API gateway. Every named well-known path 404s with the gateway's own
+    JSON error envelope; /.well-known/openid-configuration returns 401 error 1001 "User
+    authentication failed!" because the gateway intercepts it as an API call, not because a
+    document exists. The gateway DOES serve an anonymous JWKS outside /.well-known/ at
+    /dfs/jwk/v1/public-keys and /dfs/certs/v1/jwks.json - captured at authentication/discover-jwks.json.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 401
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/discover-negative-control-7f3ab91c.json
+    status: 404
+    note: negative control - correct 404
+- host: https://sandbox.apis.discover.com
+  hit_count: 0
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 401
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/discover-negative-control-7f3ab91c.json
+    status: 404
+    note: negative control - correct 404
+- host: https://partner.discoverglobalnetwork.com
+  hit_count: 0
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://developer.discover.com
+  hit_count: 0
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://www.discover.com
+  hit_count: 0
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://www.discoverglobalnetwork.com
+  hit_count: 0
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://travel.discoverglobalnetwork.com
+  hit_count: 0
+  soft_404_control:
+    probe: /.well-known/agent-card.json
+    status: 200
+    bytes: 8371
+    identical_to_root: true
+    verdict: catch-all - every path returns the same SPA shell, so no document is recorded here
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: HTML SPA shell, not a document
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: HTML SPA shell, not a document
+  - path: /.well-known/api-catalog
+    status: 200
+    note: HTML SPA shell, not a document
+  - path: /.well-known/agent-card.json
+    status: 200
+    note: HTML SPA shell, not a document
+  - path: /.well-known/agent.json
+    status: 200
+    note: HTML SPA shell, not a document
+  - path: /apis.json
+    status: 200
+    note: HTML SPA shell, not a document
+  - path: /llms.txt
+    status: 200
+    note: HTML SPA shell, not a document

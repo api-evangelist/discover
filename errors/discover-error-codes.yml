@@ -1,0 +1,411 @@
+# Discover published error-code registry - harvested, not derived.
+generated: '2026-09-06'
+method: searched
+source: https://partner.discoverglobalnetwork.com/products/discover-stored-token-services?tab=api-specs
+docs: https://partner.discoverglobalnetwork.com/products/discover-stored-token-services?tab=api-specs
+format: vendor
+note: 'Discover publishes no OpenAPI, so this registry is read from the published API Specs tabs on the
+  Discover Partner Product Portal (server-rendered content, fetched 2026-09-06). Errors are NOT RFC 9457
+  problem+json: the envelope is a MessageInfo object with `code` (string) and `message` (human readable),
+  and one response may carry several messages.'
+envelope:
+  media_type: application/json
+  shape: '{ "code": "<string>", "message": "<string>" }'
+  multiple_messages: true
+  fields:
+  - name: code
+    presence: mandatory
+    type: String
+    description: Error or Warning code
+  - name: message
+    presence: mandatory
+    type: String
+    description: Human readable description of the error or warning
+  example:
+    code: '20001'
+    message: Invalid PAN
+code_families:
+- prefix: 6 / 1001 / 1003 / 1006 / 30001 / 30002 / 9000x
+  meaning: Gateway-level errors returned by any Discover API regardless of product
+  see: errors/discover-problem-types.yml
+- prefix: 0000x
+  meaning: Wallet program / issuer routing errors
+- prefix: 100xx
+  meaning: Card, PAN, token, device and provisioning errors
+- prefix: 101xx
+  meaning: Token lifecycle, OTP and channel errors
+- prefix: 300xx
+  meaning: Downstream processing and OTP errors
+- prefix: 700xx
+  meaning: Issuer / BIN range lookup errors
+- prefix: 900xx
+  meaning: Request payload and HTTP header validation errors
+- prefix: '20001'
+  meaning: Account Updater enrollment errors
+error_codes:
+- code: '6'
+  message: The system has difficulty processing the request.
+  http_status: 500
+- code: '00000'
+  message: The response was successful.
+  http_status: 200
+- code: '00001'
+  message: Unknown Wallet Program.
+  http_status: 400
+- code: '00002'
+  message: Unsupported Wallet Program.
+  http_status: 400
+- code: '00003'
+  message: Unsupported API.
+  http_status: 400
+- code: '00004'
+  message: Unknown Issuer. The issuerId is unknown in the system.
+  http_status: 400
+- code: '1001'
+  message: User authentication failed
+  http_status: 401
+- code: '1003'
+  message: Not authorized to access the resource
+  http_status: 400
+- code: '1006'
+  message: The system is in maintenance mode.
+  http_status: 503
+- code: '10001'
+  message: Invalid PAN.
+  http_status: 400
+- code: '10002'
+  message: PAN Ineligible.
+  http_status: 400
+- code: '10003'
+  message: PAN provisioning count exceeded.
+  http_status: 400
+- code: '10004'
+  message: Cryptographic error. This is returned when you try to decrypt or encrypt sensitive information.
+  http_status: 400
+- code: '10005'
+  message: PAR doesn't exist.
+  http_status: 204
+- code: '10006'
+  message: Card identifier validation failed.
+  http_status: 400
+- code: '10007'
+  message: Account/user can't be added at this time.
+  http_status: 400
+- code: '10008'
+  message: The token requestor can't be updated at this time.
+  http_status: 400
+- code: '10009'
+  message: Account is already provisioned in the wallet.
+  http_status: 400
+- code: '10010'
+  message: Name verification failed.
+  http_status: 400
+- code: '10011'
+  message: Account/user can't be updated at this time.
+  http_status: 400
+- code: '10012'
+  message: The card expired.
+  http_status: 400
+- code: '10013'
+  message: User is locked out from provisioning.
+  http_status: 400
+- code: '10014'
+  message: Account not found.
+  http_status: 400
+- code: '10015'
+  message: The OTP verification failed.
+  http_status: 400
+- code: '10016'
+  message: Invalid terms and conditions Id.
+  http_status: 400
+- code: '10017'
+  message: The tokenRequestorPartyId isn't eligible for token aggregator boarding.
+  http_status: 400
+- code: '10018'
+  message: Device has reached provisioning limit.
+  http_status: 400
+- code: '10019'
+  message: Invalid device type.
+  http_status: 400
+- code: '10020'
+  message: Invalid asset. The UUID provided is invalid.
+  http_status: 400
+- code: '10021'
+  message: Invalid provision correlation Id
+  http_status: 400
+- code: '10022'
+  message: Expired provision correlation Id
+  http_status: 400
+- code: '10023'
+  message: Duplicate request. The request was identified as duplicate for the given transaction.
+  http_status: 400
+- code: '10024'
+  message: Unknown programId. This is returned when the programId is invalid.
+  http_status: 400
+- code: '10025'
+  message: Invalid cryptoType. This is returned when the provided cryptoType is invalid.
+  http_status: 400
+- code: '10026'
+  message: The token is not valid,
+  http_status: 400
+- code: '10027'
+  message: Invalid SessionId.
+  http_status: 400
+- code: '10028'
+  message: Invalid softwareVersion. The softwareVersion passed in is not valid.
+  http_status: 400
+- code: '10029'
+  message: Invalid tokenRequestorPartyId. The named field is invalid in the request.
+  http_status: 400
+- code: '10030'
+  message: Invalid existing account details.
+  http_status: 400
+- code: '10031'
+  message: Token re-personalization in progress.
+  http_status: 400
+- code: '10034'
+  message: Invalid taskId.
+  http_status: 400
+- code: '10035'
+  message: Expired profilecorrelationId.
+  http_status: 400
+- code: '10036'
+  message: Token re-personalization retry count exceeded.
+  http_status: 400
+- code: '10037'
+  message: Invalid token requestor and payment token identifiers. The mapped values are not valid.
+  http_status: 400
+- code: '10038'
+  message: Invalid wbcVersion. The wbcVersion passed in is not valid.
+  http_status: 400
+- code: '10039'
+  message: Device is already registered.
+  http_status: 400
+- code: '10040'
+  message: Device is already initialized and the pocket keys have been generated for the wallet and device
+    combination.
+  http_status: 400
+- code: '10041'
+  message: Device is already de-registered.
+  http_status: 400
+- code: '10042'
+  message: Device not found in the database.
+  http_status: 400
+- code: '10043'
+  message: Device registration in progress.
+  http_status: 400
+- code: '10044'
+  message: Device is not registered in the database.
+  http_status: 400
+- code: '10045'
+  message: Device is de-registered in the database.
+  http_status: 400
+- code: '10046'
+  message: Device initialization failed.
+  http_status: 400
+- code: '10047'
+  message: Bad external status due to the account being closed.
+  http_status: 400
+- code: '10048'
+  message: Bad external status (i.e. lost or stolen device).
+  http_status: 400
+- code: '10102'
+  message: Passed tokenId is invalid.
+  http_status: 400
+- code: '10103'
+  message: The status associated with the passed-in tokenId is invalid.
+  http_status: 400
+- code: '10104'
+  message: Invalid channel identifier in the request.
+  http_status: 400
+- code: '10105'
+  message: Error occurred while retrieving status from one or more systems.
+  http_status: 400
+- code: '10106'
+  message: This is returned when the operation type isn't supported by the wallet.
+  http_status: 400
+- code: '10107'
+  message: Invalid PAN identifier. The PAN identifier wasn't found in the NWP system.
+  http_status: 400
+- code: '10108'
+  message: There's no tokens found for the panId.
+  http_status: 400
+- code: '10109'
+  message: This is returned when the index sent in the request isn't unique.
+  http_status: 400
+- code: '10110'
+  message: Invalid one-time password (OTP) channel identifier. The selectedChannelId passed in isn't valid.
+  http_status: 400
+- code: '10111'
+  message: The one-time password (OTP) request limit was reached. Often a rate limit issue.
+  http_status: 400
+- code: '10112'
+  message: The user is locked out from provisioning due to too many unsuccessful one-time password (OTP)
+    submissions.
+  http_status: 400
+- code: '10113'
+  message: Invalid one-time password (OTP).
+  http_status: 400
+- code: '10114'
+  message: The time-to-live of the one-time password (OTP) value is expired.
+  http_status: 400
+- code: '10115'
+  message: Invalid card art elements.
+  http_status: 400
+- code: '10116'
+  message: The one-time password (OTP) isn't present in the request for the issuer who is configured to
+    receive it.
+  http_status: 400
+- code: '10117'
+  message: The AccountContext/TokenContext not present in request when Issuer is configured to receive
+    it
+  http_status: 400
+- code: '10118'
+  message: Invalid consumer and Cardholder object combination. make sure that either the cardHolderData
+    or the consumerData object is included in the request.
+  http_status: 400
+- code: '10119'
+  message: Invalid token and tokenReferenceId field combination. Double-check that either the token or
+    the tokenReferenceId is included in your request.
+  http_status: 400
+- code: '10120'
+  message: Invalid tokenRequestorId. The named field is invalid in your request.
+  http_status: 400
+- code: '10121'
+  message: There are no results found for the given taskId.
+  http_status: 412
+- code: '10122'
+  message: The request failed because the data sent in the request is too large.
+  http_status: 413
+- code: '10123'
+  message: Duplicate recordLevelId in the request. Make sure the unique record level identifiers are in
+    the request.
+  http_status: 400
+- code: '10124'
+  message: The tokenReferenceId and the PAN may not be present in the request.
+  http_status: 400
+- code: '10125'
+  message: The token not activ.e
+  http_status: 400
+- code: '10131'
+  message: No contact channels were retrieved for the Cardholder.
+  http_status: 400
+- code: '10132'
+  message: The tokenId wasn't found.
+  http_status: 400
+- code: '10133'
+  message: Unsupported resource type.
+  http_status: 400
+- code: '30001'
+  message: The request was valid and while processing but it returned an unexpected error.
+  http_status: 500
+- code: '30002'
+  message: Downstream system unavailable.
+  http_status: 500
+- code: '30003'
+  message: Invalid one-time password (OTP) request limit was reached.
+  http_status: 400
+- code: '30004'
+  message: The one-time password (OTP) value is invalid.
+  http_status: 400
+- code: '30005'
+  message: Expired one-time password (OTP) value.
+  http_status: 400
+- code: '30006'
+  message: The one-time password (OTP) selectedChannelIdentifier is invalid.
+  http_status: 400
+- code: '30007'
+  message: The user is locked out from provisioning due to too many unsuccessful one-time password (OTP)
+    submissions.
+  http_status: 400
+- code: '70001'
+  message: The issuer details were not found for the tokenRequestorPartyId and the bankIdentification.
+  http_status: 200
+- code: '70002'
+  message: Issuer details for the IIN ResourceId are missing.
+  http_status: 200
+- code: '70003'
+  message: PAN whitelisting check failed.
+  http_status: 400
+- code: '70004'
+  message: Luhn validation check failed for the PAN.
+  http_status: 400
+- code: '70005'
+  message: Bin range refresh not enabled for the issuer network partyId.
+  http_status: 200
+- code: '70006'
+  message: Duplicate issuer bin range refresh.
+  http_status: 200
+- code: '70007'
+  message: Bin range refresh processing error.
+  http_status: 400
+- code: '70008'
+  message: No eligible bin range to add or update.
+  http_status: 200
+- code: '70010'
+  message: The token requestor party details not found for the tokenrequestorpartyId and the tokenrequestorId.
+  http_status: null
+  note: HTTP status not stated in the published table (value "xxx")
+- code: '90000'
+  message: Payload couldn't be parsed.
+  http_status: 400
+- code: '90001'
+  message: Mandatory named field isn't present in the request.
+  http_status: 400
+- code: '90002'
+  message: Invalid field length. The named field is not present in the request.
+  http_status: 400
+- code: '90003'
+  message: The field type is invalid
+  http_status: 400
+- code: '90004'
+  message: Invalid field value. The named field is invalid in the request.
+  http_status: 400
+- code: '90005'
+  message: Invalid HTTP header.
+  http_status: 400
+- code: '90006'
+  message: No content-type in HTTP header. The named field is not present in the request.
+  http_status: 400
+- code: '90007'
+  message: Too many items in the request.
+  http_status: 400
+- code: '90008'
+  message: The panId wasn't found or resulted in an error.
+  http_status: 400
+- code: '90009'
+  message: Could not generate the one-time password (OTP) .
+  http_status: 500
+- code: '10126'
+  message: Token is locked. To complete the checkout please call XXX-XXX-XXXX.
+  http_status: 400
+- code: '10127'
+  message: Token not found.
+  http_status: 400
+- code: '10128'
+  message: Unable to send the one-time password (OTP) requested for this transaction.
+  http_status: 400
+- code: '10129'
+  message: Unable to perform the one-time password (OTP) send operation that was requested for this transaction.
+  http_status: 400
+- code: '10130'
+  message: Invalid token type.
+  http_status: 400
+account_updater_error_codes:
+  source: https://partner.discoverglobalnetwork.com/products/discover-network-account-updater?tab=api-specs
+  note: In addition to the generic gateway error codes.
+  codes:
+  - code: '10001'
+    message: Invalid PAN
+    description: This will be returned when basic validation on the PAN is performed such as a Luhn check
+    action: Re-submit with the Valid PAN
+  - code: '10006'
+    message: Cryptographic Error
+    description: This will be returned if there is an issue when trying to decrypt or encrypt any sensitive
+      information
+    action: Resubmit with valid encryption certificate or valid encryption content
+  - code: '20001'
+    message: Requestor not enrolled for Account Updater
+    description: Requestor not enrolled for Account Updater
+    action: Requestor is not eligible to submit Account Updater inquiry requests. Requestor needs to contact
+      Discover Network before retrying

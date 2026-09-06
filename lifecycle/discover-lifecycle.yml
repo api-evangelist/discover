@@ -1,0 +1,86 @@
+generated: '2026-09-06'
+method: searched
+source: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide
+note: >-
+  Searched the Discover Partner Product Portal, the Discover Developer Center and the Discover
+  Global Network site for a versioning policy, a deprecation policy, a changelog, an SLA and a
+  status page. Only the versioning scheme and the certificate-rotation cadence are published; the
+  rest are genuinely absent from the public surface (each probe recorded below).
+versioning:
+  scheme: uri-path
+  current: mixed - v1 and v2 per service
+  observed:
+  - /globalpymt/cardmgmt/account-card/v1/...
+  - /globalpymt/ddx/stored-payment-token/boarding/v2/...
+  - /globalpymt/ddx/stored-payment-token/cryptogram/v2/...
+  - /globalpymt/ddx/stored-payment-token/operations/v1/...
+  - /v1/iins
+  - /api/country-acceptance/v2/...
+  docs: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide
+  policy_published: false
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  detail: No deprecation or sunset policy is published, and no RFC 8594 Sunset/Deprecation header
+    is documented. Version retirement is handled inside the partner relationship.
+key_rotation:
+  jwks_key_lifetime_days: 90
+  detail: '"The JWKS endpoint keys expire every 90 days" - the only published rotation cadence
+    Discover states for any credential.'
+  source: https://partner.discoverglobalnetwork.com/products/discover-stored-token-services?tab=api-specs
+environments:
+  detail: Environment routing is by API Plan value, not by hostname alone.
+  tiers:
+  - name: Sandbox
+    endpoint: sandbox.apis.discover.com
+  - name: Certification
+    endpoint: sandbox.apis.discover.com
+  - name: Production
+    endpoint: apis.discover.com
+  source: https://partner.discoverglobalnetwork.com/products/discover-stored-token-services?tab=api-specs
+implementation_phases:
+  detail: Discover publishes a four-phase implementation model - project setup, integration and
+    certification, production and end-to-end testing, rollout.
+  source: https://partner.discoverglobalnetwork.com/going-live-with-discover
+sla:
+  url: null
+  uptime_target: null
+  published: false
+status_page: null
+status_page_probes:
+- url: https://partner.discoverglobalnetwork.com/status
+  status: 404
+- url: https://status.discover.com
+  status: 0
+  note: does not resolve
+changelog:
+  url: null
+  probes:
+  - url: https://partner.discoverglobalnetwork.com/changelog
+    status: 404
+  - url: https://partner.discoverglobalnetwork.com/release-notes
+    status: 404
+  - url: https://partner.discoverglobalnetwork.com/whats-new
+    status: 404
+deprecated_operations: []
+retired_surfaces:
+- id: stored-payment-tokens
+  detail: The product page apis.yml pointed at (partner.discoverglobalnetwork.com/products/stored-payment-tokens)
+    now soft-404s - it returns HTTP 200 with the generic portal title and no product body,
+    identical to a nonsense slug. The product was renamed and now lives at
+    /products/discover-stored-token-services.
+  checked: '2026-09-06'
+- id: dci-customer-service
+  detail: /products/dci-customer-service soft-404s the same way; the live page is
+    /products/diners-club-international-customer-service.
+  checked: '2026-09-06'
+- id: developer-center-rebuild
+  detail: A rebuilt Discover Developer Center is visible at developertest2.discover.com
+    (HTTP 200, "Browse APIs with interactive OpenAPI documentation"), fronting the same
+    invitation-only sign-in. The live Developer Center at developer.discover.com is Drupal 10.
+  checked: '2026-09-06'
+gaps:
+- No deprecation or sunset policy.
+- No changelog or release notes.
+- No public status page or SLA.

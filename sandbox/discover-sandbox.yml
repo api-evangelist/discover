@@ -1,0 +1,58 @@
+generated: '2026-09-06'
+method: searched
+source: https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide
+docs: https://partner.discoverglobalnetwork.com/products/discover-stored-token-services?tab=api-specs
+note: >-
+  Discover runs a real, separately-hosted sandbox, but it is not self-serve and it publishes no
+  magic test values. No test PANs, test tokens, test clocks or fixture triggers appear anywhere in
+  the public documentation - a partner receives environment-specific credentials at onboarding. No
+  test values are invented here.
+separation:
+  model: environment-routed by API Plan header
+  header: X-DFS-API-PLAN
+  detail: >-
+    The API Plan value issued at registration decides which environment a call reaches. Credentials,
+    certificates and keys are issued per environment and must be kept separate - "using the
+    incorrect credentials will result in Errors".
+environments:
+- name: Sandbox
+  host: sandbox.apis.discover.com
+  probed: '2026-09-06'
+  reachable: true
+  anonymous_surface: /dfs/jwk/v1/public-keys returns 200
+- name: Certification
+  host: sandbox.apis.discover.com
+- name: Production
+  host: apis.discover.com
+  probed: '2026-09-06'
+  reachable: true
+naming_conventions:
+  organization: 'DEV for test-environment applications, PROD for production applications'
+  application: 'name includes TEST for test applications, PROD for production (e.g. AbcTest, AbcProd)'
+credentials_issued_per_environment:
+- Client ID (API key)
+- Client Secret
+- API Scopes
+- API Plan
+- Consumer Application Certificates
+- Discover JWS public keys + KID
+- Discover JWE public keys + KID
+- Partner JWS/JWE public keys + KID
+- X.509 SSL certificate where mTLS is used
+self_service: false
+access_path: >-
+  Portal access is by invitation only. A prospective partner submits the Contact Us form at
+  partner.discoverglobalnetwork.com/contact-us or is invited by a Discover representative; the
+  Developer Center then issues the sandbox application and credentials.
+test_data:
+  test_cards: null
+  test_accounts: null
+  test_tokens: null
+  test_clocks: null
+  fixtures: null
+  detail: none published
+health_check_probe:
+  detail: >-
+    Every DDX service exposes a POST healthcheck sibling that returns {healthy, message, version,
+    platform, timestamp} - the closest thing to a public smoke test, though it still requires an
+    access token.
