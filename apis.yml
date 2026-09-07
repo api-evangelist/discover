@@ -379,6 +379,20 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/discover.png
 access: 3rd-Party
 common:
+- type: Signup
+  url: https://www.discover.com/register-account/?ICMPGN=SA_LOGIN_OVERLAY_REGISTER
+- type: Corporate
+  url: https://www.discover-financial.com
+- type: PartnerPortal
+  url: https://partner.discoverglobalnetwork.com/
+- type: Network
+  url: https://www.discoverglobalnetwork.com/
+- type: Blog
+  url: https://technology.discover.com/
+- type: InvestorRelations
+  url: https://investorrelations.discover.com/
+- type: Legal
+  url: https://www.discover.com/company/our-company/legal/
 - type: Website
   url: https://www.discover.com/
 - type: DomainSecurity
