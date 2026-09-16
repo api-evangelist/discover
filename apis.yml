@@ -166,6 +166,12 @@ apis:
   tags:
   - Fraud
   - Alerts
+  - Notification
+  - Security
+  - Payments
+  tags_raw:
+  - Fraud
+  - Alerts
   - Notifications
   - Security
   - Payments
@@ -345,6 +351,14 @@ apis:
     performed server side.
 name: Discover
 tags:
+- Credit Cards
+- Payments
+- Card Network
+- Tokenization
+- Financial-Services
+- Fraud
+- Fortune 500
+tags_raw:
 - Credit Cards
 - Payments
 - Card Network
