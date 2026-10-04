@@ -145,6 +145,12 @@ apis:
 - aid: discover:discover-enhanced-decisioning-api
   name: Discover Enhanced Decisioning API
   tags:
+  - Fraud Prevention
+  - Risk Management
+  - Decisioning
+  - Payments
+  - Analytics
+  tags_raw:
   - Fraud
   - Risk
   - Decisioning
@@ -164,7 +170,7 @@ apis:
 - aid: discover:discover-fraud-alerts
   name: Discover Fraud Alerts
   tags:
-  - Fraud
+  - Fraud Prevention
   - Alerts
   - Notification
   - Security
@@ -355,8 +361,8 @@ tags:
 - Payments
 - Card Network
 - Tokenization
-- Financial-Services
-- Fraud
+- Financial Services
+- Fraud Prevention
 - Fortune 500
 tags_raw:
 - Credit Cards
@@ -366,6 +372,7 @@ tags_raw:
 - Financial Services
 - Fraud
 - Fortune 500
+- Financial-Services
 type: Index
 deliveryModel:
   model: saas
