@@ -1,4 +1,4 @@
-# Discover (discover)
+# Discover
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,167 +64,142 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Discover is a financial services company that offers a range of products and services to help individuals manage their money. They provide credit cards, personal loans, home equity loans, and savings and checking accounts. Discover also operates an online banking platform that allows customers to easily access and manage their accounts from anywhere. Additionally, Discover offers cash back rewards and other perks to help customers make the most of their finances.
+Discover Financial Services is a US consumer bank and payments network - credit cards, personal loans, student loans, home equity loans, and online savings and checking accounts - and, through Discover Global Network, one of the four global card acceptance networks, alongside the Diners Club International and PULSE brands. Its developer-facing business is the network side: issuers, acquirers, processors, wallet providers and token requestors integrate through the Discover Partner Product Portal and the invitation-only Discover Developer Center for tokenization, account updating, IIN/BIN lookup, fraud alerts, enhanced decisioning and a set of travel and acceptance tools. Discover's footer now reads "Discover, a division of Capital One, N.A., Member FDIC".
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-search/discover/refs/heads/main/apis.yml)
+**Areas:** Credit Cards · Payments · Card Network · Tokenization · Financial Services · Fraud Prevention · Fortune 500
 
-## Scope
+## Discover on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Discover is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/discover/](https://apis.io/providers/discover/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (17)
 
-- Credit Cards
+- [Discover HCE Wallet Services](https://apis.io/apis/discover/discover-hce-wallet-services/) — Discover HCE Wallet Services offers a secure and convenient way for customers to add their Discover card to their mobile devices for contactless payments.…
+- [Discover SE Wallet Services](https://apis.io/apis/discover/discover-se-wallet-services/) — Discover SE Wallet Services is a leading financial technology company that specializes in providing secure and innovative digital wallet solutions for…
+- [Discover Side-By-Side Token Services](https://apis.io/apis/discover/discover-side-by-side-token-services/) — SXS tokens are alternate tokens provisioned by a Token Requestor in addition to primary tokens they provisioned from front-of-card brands. As the primary…
+- [Discover Stored Token Services](https://apis.io/apis/discover/discover-stored-payment-tokens/) — Discover Stored Token Services (DSTS) replaces a customer's Primary Account Number (PAN) with a unique, secure payment token at checkout, for card-on-file,…
+- [Discover Airport Lounge & Travel Program](https://apis.io/apis/discover/discover-airport-lounge-travel-program/) — Discover Airport Lounge & Travel Program provides exclusive access to premium airport lounges worldwide, offering travelers a comfortable and luxurious…
+- [Discover ATM Locator](https://apis.io/apis/discover/discover-atm-locator/) — Discover ATM Locator is a user-friendly tool that allows cardholders to easily find nearby ATMs where they can access their accounts and withdraw cash. By…
+- [Diners Club International Customer Service](https://apis.io/apis/discover/discover-dci-customer-service/) — Diners Club International customer service capability offered to Diners Club franchisees and partners through the Discover Global Network partner product…
+- [Discover Enhanced Decisioning API](https://apis.io/apis/discover/discover-enhanced-decisioning-api/) — Discover Enhanced Decisioning API is a powerful tool that allows businesses to make smarter and faster decisions by leveraging advanced data analytics and…
+- [Discover Fraud Alerts](https://apis.io/apis/discover/discover-fraud-alerts/) — Discover Fraud Alerts is a service provided by Discover Financial Services that helps protect cardholders from unauthorized and fraudulent activity on their…
+- [Discover Country Acceptance](https://apis.io/apis/discover/discover-country-acceptance/) — Discover Country Acceptance is a financial institution that specializes in providing loans to individuals in rural and underserved communities. They…
+- [Discover Currency Converter](https://apis.io/apis/discover/discover-currency-converter/) — Discover Currency Converter is a user-friendly tool that allows individuals to easily convert between different currencies. With a simple interface, users…
+- [Discover Tip Etiquette](https://apis.io/apis/discover/discover-tip-etiquette/) — Discover Tip Etiquette is a platform designed to educate individuals on the proper etiquette and practices when it comes to tipping. This includes providing…
+- [Discover Travel Guides](https://apis.io/apis/discover/discover-travel-guides/) — Discover Travel Guides is a comprehensive travel planning and booking service that helps travelers create unforgettable and seamless travel experiences.…
+- [Discover Payment Account Reference](https://apis.io/apis/discover/discover-payment-account-reference/) — Payment Account Reference (PAR) gives merchants and solution providers an aggregated view of a customer's account without exposing the PAN or the payment…
+- [Discover IIN Data Lookup Service](https://apis.io/apis/discover/discover-iin-data-lookup-service/) — The IIN Data Lookup Service returns up-to-date Issuer Identification Number (BIN) range data so an acquirer, processor or merchant can identify the issuer,…
+- [Discover Network Account Updater](https://apis.io/apis/discover/discover-network-account-updater/) — Discover Network Account Updater keeps recurring and stored card-on-file payment credentials current so merchants can keep processing payments without…
+- [Discover Issuer Card Account Services](https://apis.io/apis/discover/discover-issuer-card-account-services/) — Issuer Card Account Services (iCAS) is the Discover Global Network capability issuers use to manage changes to card accounts across the life of the account.…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-11-15
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Discover HCE Wallet Services
+Event-driven and webhook contracts.
 
-Discover HCE Wallet Services offers a secure and convenient way for customers to add their Discover card to their mobile devices for contactless payments using Host Card Emulation (HCE) technology.
+- [Discover Webhooks](https://apis.io/asyncapis/discover/discover-webhooks/)
 
-**Human URL:** [Overview](https://partner.discoverglobalnetwork.com/products/hce-wallet-services?tab=overview)
+#### Security (3)
 
-**Tags:** Credit Cards, Wallets
+Authentication, trust centre, and vulnerability disclosure.
 
-**Properties:**
+- [Discover Authentication](https://apis.io/security/discover/discover-authentication/)
+- [Discover Domain Security](https://apis.io/security/discover/discover-domain-security/)
+- [Discover Vulnerability Disclosure](https://apis.io/security/discover/discover-vulnerability-disclosure/)
 
-- [Documentation](https://partner.discoverglobalnetwork.com/products/hce-wallet-services?tab=api-specs)
+#### OAuth scopes (1)
 
-### Discover SE Wallet Services
+The permissions the API asks for.
 
-Discover SE Wallet Services provides secure digital wallet solutions enabling users to store payment information, loyalty cards, and coupons in a single secure location.
+- [Discover Scopes](https://apis.io/scopes/discover/discover-scopes/)
 
-**Human URL:** [Overview](https://partner.discoverglobalnetwork.com/products/se-wallet-services?tab=overview)
+#### Plans and pricing (1)
 
-**Properties:**
+Published plans, tiers and prices.
 
-- [Documentation](https://partner.discoverglobalnetwork.com/products/se-wallet-services?tab=overview)
+- [Discover Plans Pricing](https://apis.io/plans/discover/discover-plans-pricing/)
 
-### Discover Side-By-Side Token Services
+#### Rate limits (1)
 
-SXS tokens are alternate tokens provisioned by a Token Requestor in addition to primary tokens from front-of-card brands, providing routing support and security enforcement to participating Debit Networks.
+Published request limits.
 
-**Human URL:** [Overview](https://partner.discoverglobalnetwork.com/products/sxs-token-services?tab=overview)
+- [Discover Rate Limits](https://apis.io/rate-limits/discover/discover-rate-limits/)
 
-**Properties:**
+#### FinOps (1)
 
-- [Documentation](https://partner.discoverglobalnetwork.com/products/sxs-token-services)
+What the API costs to run, by operation.
 
-### Discover Stored Payment Tokens
+- [Discover Finops](https://apis.io/finops/discover/discover-finops/)
 
-Discover Stored Payment Tokens lets customers store payment information for future use. Tokenization replaces sensitive payment data with a unique identifier, reducing fraud and unauthorized access risk.
+## Where to find this API
 
-**Human URL:** [Overview](https://partner.discoverglobalnetwork.com/products/stored-payment-tokens?tab=overview)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-**Properties:**
-
-- [Documentation](https://www.discoverglobalnetwork.com/solutions/fraud-security/stored-payment-tokens/)
-
-### Discover Airport Lounge & Travel Program
-
-Discover Airport Lounge & Travel Program provides exclusive access to premium airport lounges worldwide and additional travel perks for cardholders.
-
-**Human URL:** [Overview](https://partner.discoverglobalnetwork.com/products/airport-lounge-locator?tab=overview)
-
-**Properties:**
-
-- [Documentation](https://partner.discoverglobalnetwork.com/products/airport-lounge-locator)
-
-### Discover ATM Locator
-
-Discover ATM Locator helps cardholders find nearby ATMs that accept Discover cards by location or zip code, with details on hours and fees.
-
-**Human URL:** [Overview](https://partner.discoverglobalnetwork.com/products/atm-locator?tab=overview)
-
-**Properties:**
-
-- [Documentation](https://partner.discoverglobalnetwork.com/products/atm-locator)
-
-### Discover DCI Customer Service
-
-Discover DCI Customer Service provides assistance to customers with questions about their accounts, products, or services.
-
-**Human URL:** [Overview](https://partner.discoverglobalnetwork.com/products/dci-customer-service?tab=overview)
-
-**Properties:**
-
+- [Website](https://www.discover.com/)
 - [Documentation](https://partner.discoverglobalnetwork.com/going-live-with-discover?tab=developer-guide)
+- [Getting started](https://partner.discoverglobalnetwork.com/going-live-with-discover)
+- [API reference](https://partner.discoverglobalnetwork.com/products)
+- [Support](https://partner.discoverglobalnetwork.com/contact-us)
+- [Blog](https://technology.discover.com/)
+- [Security](https://www.discover.com/responsible-disclosure)
+- [Terms of service](https://www.discoverglobalnetwork.com/terms-of-use/)
+- [Privacy policy](https://www.discoverglobalnetwork.com/privacy-policy/)
+- [GitHub](https://github.com/discoverfinancial)
 
-### Discover Enhanced Decisioning API
+## API Evangelist rating
 
-Discover Enhanced Decisioning API helps businesses make smarter and faster decisions using advanced data analytics and machine learning across credit worthiness, fraud detection, and customer segmentation.
+**Kin Score 43.5** — developing · rubric 0.25.0 · scored 2026-10-23
 
-**Human URL:** [Overview](https://partner.discoverglobalnetwork.com/products/discover-enhanced-decisioning?tab=overview)
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 39.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 61.9 |
+| Access clarity | 34.2 |
 
-**Properties:**
+**Agent readiness 37.8** — agent-ready
 
-- [Documentation](https://partner.discoverglobalnetwork.com/products/discover-enhanced-decisioning?tab=documentation)
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
 
-### Discover Fraud Alerts
+**Regulatory alignment 42.0** — Payments
 
-Discover Fraud Alerts notifies cardholders of suspicious or unauthorized activity via text, email, or phone so they can act quickly.
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/discover/](https://apis.io/providers/discover/).
 
-**Human URL:** [Overview](https://partner.discoverglobalnetwork.com/products/fraud-alerts?tab=overview)
+## How this profile is made
 
-**Properties:**
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- [Documentation](https://www.discover.com/credit-cards/card-smarts/fraud-faqs/)
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Discover: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-### Discover Country Acceptance
+## Open an issue
 
-Discover Country Acceptance provides information about Discover card acceptance in countries around the world.
-
-**Human URL:** [Overview](https://partner.discoverglobalnetwork.com/products/country-acceptance?tab=overview)
-
-**Properties:**
-
-- [Documentation](https://www.discover.com/credit-cards/international-use/)
-
-### Discover Currency Converter
-
-Discover Currency Converter is a user-friendly tool that converts amounts between currencies using current exchange rates.
-
-**Human URL:** [Overview](https://partner.discoverglobalnetwork.com/products/currency-converter?tab=overview)
-
-**Properties:**
-
-- [Documentation](https://partner.discoverglobalnetwork.com/products/currency-converter?tab=overview)
-
-### Discover Tip Etiquette
-
-Discover Tip Etiquette educates cardholders on tipping practices in restaurants, spas, salons, and delivery services.
-
-**Human URL:** [Overview](https://partner.discoverglobalnetwork.com/products/tip-etiquette?tab=overview)
-
-**Properties:**
-
-- [Documentation](https://www.discover.com/online-banking/banking-topics/when-to-tip-guide/)
-
-### Discover Travel Guides
-
-Discover Travel Guides offers travel planning recommendations covering destinations, accommodations, flights, activities, and transportation.
-
-**Human URL:** [Overview](https://partner.discoverglobalnetwork.com/products/travel-guides?tab=overview)
-
-**Properties:**
-
-- [Documentation](https://travel.discoverglobalnetwork.com/jcb/)
-
-## Common Properties
-
-- [Discover Partner Product Portal](https://partner.discoverglobalnetwork.com/partner-resources)
-- [FAQ](https://partner.discoverglobalnetwork.com/faq)
-- [Privacy Policy](https://www.discoverglobalnetwork.com/privacy-policy/)
-- [Terms of Use](https://www.discoverglobalnetwork.com/terms-of-use/)
-
-## Maintainers
-
-- **FN:** Kin Lane
-- **Email:** kin@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/discover/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
